@@ -45,6 +45,17 @@ namespace TomTec.RoundBuy.API
 
             app.UseRouting();
 
+            app.UseCors(op => op
+                .WithOrigins(new[]{@"http://localhost:3000",
+                    @"http://localhost:8080",
+                    @"http://localhost:4200",
+                    @"https://localhost:44392",
+                    @"https://roundbuy.vercel.app" })
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            );
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
