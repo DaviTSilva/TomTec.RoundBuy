@@ -20,6 +20,13 @@ namespace TomTec.RoundBuy.Models
         [Column(TypeName = "varchar(120)")]
         public string LastName { get; set; }
 
+        [Column(TypeName = "varchar(120)")]
+        public string OfficialIdentification { get; set; }
+
+        public OfficialIdentificationType OfficialIdentificationType { get; set; }
+
+        public int OfficialIdentificationTypeId { get; set; }
+
         [Column(TypeName = "datetime")]
         public DateTime BirthDate { get; set; }
 
