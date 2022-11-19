@@ -34,8 +34,10 @@ namespace TomTec.RoundBuy.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile($"D:\\TomTec\\RoundBuy\\Logs\\log-roundbuy-api_{DateTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss")}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
