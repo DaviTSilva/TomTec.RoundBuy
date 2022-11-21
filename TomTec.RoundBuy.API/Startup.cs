@@ -10,7 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using TomTec.RoundBuy.Data;
+using TomTec.RoundBuy.Lib.AspNetCore.Filters;
 
 namespace TomTec.RoundBuy.API
 {
@@ -27,15 +28,25 @@ namespace TomTec.RoundBuy.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            services.AddDbContext<RoundBuyDbContext>();
             services.AddControllers();
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddScoped(typeof(IRepository<>), typeof(SQLRepository<>));
+
+            //Exceptions Handlings
+            services.AddScoped<KeyNotFoundExceptionFilterAttribute>();
+            services.AddScoped<UnauthorizedAccessExceptionFilterAttribute>();
+            services.AddScoped<GenericExceptionFilterAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile($"D:\\TomTec\\RoundBuy\\Logs\\log-roundbuy-api_{DateTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss")}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
