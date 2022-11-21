@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TomTec.RoundBuy.Models
 {
-    public class Address
+    public class Address : BaseEntity
     {
         [Required]
         [Column(TypeName = "varchar(150)")]

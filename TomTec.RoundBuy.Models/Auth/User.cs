@@ -21,6 +21,7 @@ namespace TomTec.RoundBuy.Models
         public string LastName { get; set; }
 
         [Column(TypeName = "varchar(120)")]
+        [Required]
         public string OfficialIdentification { get; set; }
 
         public OfficialIdentificationType OfficialIdentificationType { get; set; }

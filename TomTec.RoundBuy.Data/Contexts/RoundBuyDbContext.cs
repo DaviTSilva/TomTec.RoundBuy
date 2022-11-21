@@ -48,7 +48,13 @@ namespace TomTec.RoundBuy.Data
                 .HasOne(bc => bc.Claim)
                 .WithMany(c => c.UsersClaims)
                 .HasForeignKey(bc => bc.ClaimId);
-
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Claim> Claims { get; set; }
+        public DbSet<UsersClaims> UsersClaims { get; set; }
+        public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<OfficialIdentificationType> OfficialIdentificationTypes { get; set; }
     }
 }

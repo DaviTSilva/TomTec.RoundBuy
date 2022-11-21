@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomTec.RoundBuy.Data", "Tom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomTec.RoundBuy.Lib.AspNetCore", "TomTec.RoundBuy.Lib.AspNetCore\TomTec.RoundBuy.Lib.AspNetCore.csproj", "{8BE830AC-8F2C-4845-812B-67217D95943D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomTec.RoundBuy.Lib.Utils", "TomTec.RoundBuy.Lib.Utils\TomTec.RoundBuy.Lib.Utils.csproj", "{192D6538-0C04-4FFF-A70D-2C8800839DFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8BE830AC-8F2C-4845-812B-67217D95943D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BE830AC-8F2C-4845-812B-67217D95943D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BE830AC-8F2C-4845-812B-67217D95943D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192D6538-0C04-4FFF-A70D-2C8800839DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192D6538-0C04-4FFF-A70D-2C8800839DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192D6538-0C04-4FFF-A70D-2C8800839DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192D6538-0C04-4FFF-A70D-2C8800839DFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 		{17D42C71-9364-4515-A4B2-AAC5C23ADD57} = {E781531F-092B-4BA7-88FE-3386629406E5}
 		{2695E959-97CA-4006-85ED-1977E516EEA0} = {0FB2AD62-60D2-47C6-8A6D-E397A414DAC9}
 		{8BE830AC-8F2C-4845-812B-67217D95943D} = {E781531F-092B-4BA7-88FE-3386629406E5}
+		{192D6538-0C04-4FFF-A70D-2C8800839DFE} = {E781531F-092B-4BA7-88FE-3386629406E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CE6FD87-EABD-40E0-BE1A-D506B8154C27}
