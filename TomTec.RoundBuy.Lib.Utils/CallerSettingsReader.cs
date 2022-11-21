@@ -9,7 +9,7 @@ namespace TomTec.RoundBuy.Lib.Utils
     public class CallerSettingsReader
     {
         /// <summary>
-        /// Uses the caller app settings, that needs to be named "appsettings.json"
+        /// Uses the caller assembly app settings, that needs to be named "appsettings.json"
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName"></param>
