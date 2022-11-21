@@ -50,7 +50,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
-            var user = _userRepository.Get(id);
+            var user = _userRepository.Get(u => u.Id == id && u.Active == true);
             return Ok(new
             {
                 message = ResponseMessage.Success,
@@ -62,7 +62,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [HttpGet("username/{userName}")]
         public IActionResult GetUserByUserName(string userName)
         {
-            var user = _userRepository.Get(u => u.UserName == userName).FirstOrDefault();
+            var user = _userRepository.Get(u => u.UserName == userName && u.Active == true).FirstOrDefault();
             return Ok(new
             {
                 message = ResponseMessage.Success,
@@ -74,7 +74,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [HttpGet("email/{email}")]
         public IActionResult GetUserByEmail(string email)
         {
-            var user = _userRepository.Get(u => u.Email == email).FirstOrDefault();
+            var user = _userRepository.Get(u => u.Email == email && u.Active == true).FirstOrDefault();
             return Ok(new
             {
                 message = ResponseMessage.Success,
@@ -84,10 +84,23 @@ namespace TomTec.RoundBuy.API.Controllers.v1
 
         [Authorization]
         [HttpDelete("{id}")]
-        public IActionResult CancellUser(int id)
+        public IActionResult DeleteUser(int id)
         {
             var user = _userRepository.Get(id);
             user.Active = false;
+            _userRepository.Update(user);
+            return Ok(new
+            {
+                message = ResponseMessage.Success,
+            });
+        }
+
+        [Authorization]
+        [HttpPost("restore/{id}")]
+        public IActionResult RestoreDeletedUser(int id)
+        {
+            var user = _userRepository.Get(id);
+            user.Active = true;
             _userRepository.Update(user);
             return Ok(new
             {
@@ -101,6 +114,9 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             User user = dto.ToModel();
             user.Id = id;
 
+            var initialUser = _userRepository.Get(id);
+            user.Password = initialUser.Password;
+            user.PasswordSalt = initialUser.PasswordSalt;
             _userRepository.Update(user);
 
             return Ok(new

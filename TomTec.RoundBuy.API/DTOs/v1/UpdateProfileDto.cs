@@ -18,7 +18,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
         public string ProfilePictureURL { get; set; }
         public int AddressId { get; set; }
         public int OfficialIdentificationTypeId { get; set; }
-        public string OfficalIdentification { get; set; }
+        public string OfficialIdentification { get; set; }
 
 
         public User ToModel()
@@ -34,7 +34,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                 ProfilePictureURL = this.ProfilePictureURL,
                 AddressId = this.AddressId,
                 OfficialIdentificationTypeId = this.OfficialIdentificationTypeId,
-                OfficialIdentification = this.OfficalIdentification,
+                OfficialIdentification = this.OfficialIdentification,
             };
             user.UsersClaims = this.ClaimsIds.Select(id => new UsersClaims() { ClaimId = id, User = user }).ToList();
 

@@ -8,7 +8,7 @@ using TomTec.RoundBuy.Models;
 
 namespace TomTec.RoundBuy.Data
 {
-    public class SQLRepository<T> where T : BaseEntity 
+    public class SQLRepository<T> : IRepository<T> where T : BaseEntity 
     {
         private readonly RoundBuyDbContext _dbContext;
         public SQLRepository(RoundBuyDbContext context)
@@ -33,32 +33,35 @@ namespace TomTec.RoundBuy.Data
 
         public T Get(int id)
         {
-            var entities = _dbContext.Set<T>().FirstOrDefault(e => e.Id == id);
-            if (entities == null)
+            var entity = _dbContext.Set<T>().FirstOrDefault(e => e.Id == id);
+            if (entity == null)
                 throw new KeyNotFoundException($"the given id '{id}' of entity type '{typeof(T)}' was not found");
-            return entities;
+            _dbContext.SaveChanges();
+            return entity;
         }
 
         public T Get(int id, params Expression<Func<T, object>>[] includes)
         {
-            var entities = _dbContext.Set<T>().IncludeMultiple(includes).FirstOrDefault(e => e.Id == id);
-            if (entities == null)
+            var entity = _dbContext.Set<T>().IncludeMultiple(includes).FirstOrDefault(e => e.Id == id);
+            if (entity == null)
                 throw new KeyNotFoundException($"the given id '{id}' of entity type '{typeof(T)}' was not found");
-            return entities;
+            _dbContext.DetachLocal(entity, id);
+            return entity;
         }
 
         public T Get(int id, params string[] includes)
         {
-            var entities = _dbContext.Set<T>().IncludeMultiple(includes).FirstOrDefault(e => e.Id == id);
-            if (entities == null)
+            var entity = _dbContext.Set<T>().IncludeMultiple(includes).FirstOrDefault(e => e.Id == id);
+            if (entity == null)
                 throw new KeyNotFoundException($"the given id '{id}' of entity type '{typeof(T)}' was not found");
-            return entities;
+            
+            return entity;
         }
 
         public IEnumerable<T> Get()
         {
             var entities = (IEnumerable<T>)_dbContext.Set<T>();
-            if (entities == null)
+            if (entities.Count() == 0)
                 throw new KeyNotFoundException($"found no matches for a list of entity type '{typeof(T)}'");
             return entities;
         }
@@ -66,7 +69,7 @@ namespace TomTec.RoundBuy.Data
         public IEnumerable<T> Get(params Expression<Func<T, object>>[] includes)
         {
             var entities = (IEnumerable<T>)_dbContext.Set<T>().IncludeMultiple(includes);
-            if (entities == null)
+            if (entities.Count() == 0)
                 throw new KeyNotFoundException($"found no matches for a list of entity type '{typeof(T)}'");
             return entities;
         }
@@ -74,7 +77,7 @@ namespace TomTec.RoundBuy.Data
         public IEnumerable<T> Get(params string[] includes)
         {
             var entities = (IEnumerable<T>)_dbContext.Set<T>().IncludeMultiple(includes);
-            if (entities == null)
+            if (entities.Count() == 0)
                 throw new KeyNotFoundException($"found no matches for a list of entity type '{typeof(T)}'");
             return entities;
         }
@@ -82,7 +85,7 @@ namespace TomTec.RoundBuy.Data
         public IEnumerable<T> Get(Func<T, bool> query)
         {
             var entities = (IEnumerable<T>)_dbContext.Set<T>().Where(query);
-            if (entities == null)
+            if (entities.Count() == 0)
                 throw new KeyNotFoundException($"found no matches for a list of entity type '{typeof(T)}' with parameters");
             return entities;
         }
@@ -90,7 +93,7 @@ namespace TomTec.RoundBuy.Data
         public IEnumerable<T> Get(Func<T, bool> query, params Expression<Func<T, object>>[] includes)
         {
             var entities = (IEnumerable<T>)_dbContext.Set<T>().IncludeMultiple(includes).Where(query);
-            if (entities == null)
+            if (entities.Count() == 0)
                 throw new KeyNotFoundException($"found no matches for a list of entity type '{typeof(T)}' with parameters");
             return entities;
         }
@@ -98,16 +101,19 @@ namespace TomTec.RoundBuy.Data
         public IEnumerable<T> Get(Func<T, bool> query, params string[] includes)
         {
             var entities = (IEnumerable<T>)_dbContext.Set<T>().IncludeMultiple(includes).Where(query);
-            if (entities == null)
+            if (entities.Count() == 0)
                 throw new KeyNotFoundException($"found no matches for a list of entity type '{typeof(T)}' with parameters");
             return entities;
         }
 
         public void Update(T entity)
         {
+            _dbContext.DetachLocal(entity, entity.Id);
             _dbContext.Entry(entity).State = EntityState.Modified;
             _dbContext.Entry(entity).Property(x => x.CreationDate).IsModified = false;
             _dbContext.SaveChanges();
         }
+
+        
     }
 }
