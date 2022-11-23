@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TomTec.RoundBuy.Business\TomTec.RoundBuy.Business.csproj" />
     <ProjectReference Include="..\TomTec.RoundBuy.Data\TomTec.RoundBuy.Data.csproj" />
     <ProjectReference Include="..\TomTec.RoundBuy.Lib.AspNetCore\TomTec.RoundBuy.Lib.AspNetCore.csproj" />
   </ItemGroup>

@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TomTec.RoundBuy.Business\TomTec.RoundBuy.Business.csproj" />
+    <ProjectReference Include="..\TomTec.RoundBuy.Data\TomTec.RoundBuy.Data.csproj" />
     <ProjectReference Include="..\TomTec.RoundBuy.Lib.Utils\TomTec.RoundBuy.Lib.Utils.csproj" />
+    <ProjectReference Include="..\TomTec.RoundBuy.Models\TomTec.RoundBuy.Models.csproj" />
   </ItemGroup>
 
 </Project>
