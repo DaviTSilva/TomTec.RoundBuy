@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TomTec.RoundBuy.Lib.Utils;
 
-namespace TomTec.RoundBuy.Lib.Utils
+namespace TomTec.RoundBuy.Business
 {
-    public class JwtService
+    public class JwtService : IJwtService
     {
         private string _secretKey;
 

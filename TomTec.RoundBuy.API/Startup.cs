@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TomTec.RoundBuy.Business;
 using TomTec.RoundBuy.Data;
 using TomTec.RoundBuy.Lib.AspNetCore.Filters;
 
@@ -35,11 +36,14 @@ namespace TomTec.RoundBuy.API
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped(typeof(IRepository<>), typeof(SQLRepository<>));
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IJwtService, JwtService>();
 
-            //Exceptions Handlings
+            //Filters Handlings
             services.AddScoped<KeyNotFoundExceptionFilterAttribute>();
             services.AddScoped<UnauthorizedAccessExceptionFilterAttribute>();
             services.AddScoped<GenericExceptionFilterAttribute>();
+            services.AddScoped<Authorization>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +65,7 @@ namespace TomTec.RoundBuy.API
                     @"http://localhost:8080",
                     @"http://localhost:4200",
                     @"https://localhost:44392",
-                    @"https://roundbuy.vercel.app" })
+                    @"https://roundbuy.vercel.app", "*" })
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()

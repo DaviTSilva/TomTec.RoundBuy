@@ -14,6 +14,7 @@ using TomTec.RoundBuy.Models;
 namespace TomTec.RoundBuy.API.Controllers.v1
 {
     [Route("v1/profiles")]
+    [ServiceFilter(typeof(Authorization))]
     [ServiceFilter(typeof(KeyNotFoundExceptionFilterAttribute))]
     [ServiceFilter(typeof(UnauthorizedAccessExceptionFilterAttribute))]
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
@@ -34,7 +35,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             return Created(ResponseMessage.Success, new UserRegisterRecord(user));
         }
 
-        [Authorization]
         [HttpGet("")]
         public IActionResult GetUsers()
         {
@@ -46,7 +46,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [Authorization]
         [HttpGet("{id}")]
         public IActionResult GetUser(int id)
         {
@@ -58,7 +57,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [Authorization]
         [HttpGet("username/{userName}")]
         public IActionResult GetUserByUserName(string userName)
         {
@@ -70,7 +68,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [Authorization]
         [HttpGet("email/{email}")]
         public IActionResult GetUserByEmail(string email)
         {
@@ -82,7 +79,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [Authorization]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
@@ -95,7 +91,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [Authorization]
         [HttpPost("restore/{id}")]
         public IActionResult RestoreDeletedUser(int id)
         {

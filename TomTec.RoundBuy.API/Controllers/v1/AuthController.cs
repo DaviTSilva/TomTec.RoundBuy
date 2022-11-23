@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TomTec.RoundBuy.API.DTOs.v1;
+using TomTec.RoundBuy.Business;
 using TomTec.RoundBuy.Data;
 using TomTec.RoundBuy.Lib.AspNetCore;
 using TomTec.RoundBuy.Lib.AspNetCore.Filters;
@@ -22,31 +23,21 @@ namespace TomTec.RoundBuy.API.Controllers.v1
     public class AuthController : Controller
     {
         private readonly IRepository<User> _userRepository;
-        private readonly IRepository<Claim> _claimRepository;
-        private readonly JwtService _jwtService;
-        public AuthController(IRepository<User> userRepository, IRepository<Claim> claimRepository)
+        private readonly IAuthService _authService;
+        private readonly IJwtService _jwtService;
+        public AuthController(IRepository<User> userRepository, IAuthService authService, IJwtService jwtService)
         {
             _userRepository = userRepository;
-            _claimRepository = claimRepository;
-            _jwtService = new JwtService();
+            _authService = authService;
+            _jwtService = jwtService;
         }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)
         {
-            var user = _userRepository.Get(
-                u => u.Email.Equals(dto.UserNameOrEmail) || u.UserName.Equals(dto.UserNameOrEmail),
-                u => u.UsersClaims
-                ).FirstOrDefault();
-            user.UsersClaims.ToList().ForEach(c => c.Claim = _claimRepository.Get(c.ClaimId));
-
-
-            if (user == null)
-                return BadRequest(new { message = "Invalid Credentials!" });
-            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
-                return BadRequest(new { message = "Invalid Credentials!" });
-
+            var user = _authService.GetUserByLogin(dto.UserNameOrEmail, dto.Password);
             string jwtToken = _jwtService.Generate(user.Id, user.UsersClaims.Select(c => c.ToSecurityClaim()));
+
             Response.Cookies.Append("token", jwtToken, new CookieOptions
             {
                 HttpOnly = true
@@ -54,10 +45,12 @@ namespace TomTec.RoundBuy.API.Controllers.v1
 
             return Ok(new
             {
-                messsage = ResponseMessage.Success
+                messsage = ResponseMessage.Success,
+                value = new { token = jwtToken }
             });
         }
 
+        [ServiceFilter(typeof(Authorization))]
         [HttpGet("user")]
         public IActionResult GetUser()
         {

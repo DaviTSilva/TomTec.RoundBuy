@@ -3,18 +3,23 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TomTec.RoundBuy.Business;
 using TomTec.RoundBuy.Lib.Utils;
 
 namespace TomTec.RoundBuy.Lib.AspNetCore.Filters
 {
     public class Authorization :  ActionFilterAttribute, IAuthorizationFilter
     {
+        private IJwtService _jwtService;
+        public Authorization(IJwtService jwtService) 
+        {
+            _jwtService = jwtService;
+        }
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             try
             {
                 var token = context.HttpContext.Request.Cookies["token"];
-                var jwtService = new JwtService();
 
                 if (string.IsNullOrEmpty(token))
                 {
@@ -22,7 +27,7 @@ namespace TomTec.RoundBuy.Lib.AspNetCore.Filters
                     return;
                 }
 
-                var validated = jwtService.Verify(token);
+                var validated = _jwtService.Verify(token);
 
                 if (DateTime.UtcNow < validated.ValidFrom || DateTime.UtcNow > validated.ValidTo)
                 {
