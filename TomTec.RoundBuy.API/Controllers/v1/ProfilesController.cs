@@ -83,7 +83,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles = "manager")]
         public IActionResult DeleteUser(int id)
         {
             var user = _userRepository.Get(id);
@@ -96,7 +96,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpPost("restore/{id}")]
-        [Authorize]
+        [Authorize(Roles = "manager")]
         public IActionResult RestoreDeletedUser(int id)
         {
             var user = _userRepository.Get(id);

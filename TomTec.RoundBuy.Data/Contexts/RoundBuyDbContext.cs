@@ -31,10 +31,8 @@ namespace TomTec.RoundBuy.Data
             //{
 
             //}
-            modelBuilder.Entity<User>().HasIndex(u => new {
-                u.Email,
-                u.UserName,
-            }).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
             modelBuilder.Entity<Claim>().HasIndex(r => r.Name).IsUnique();
             modelBuilder.Entity<UserType>().HasIndex(ut => ut.Name).IsUnique();
 
