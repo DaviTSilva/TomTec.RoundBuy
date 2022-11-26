@@ -8,6 +8,7 @@ using TomTec.RoundBuy.Lib.Utils;
 
 namespace TomTec.RoundBuy.Lib.AspNetCore.Filters
 {
+    //Deprecated
     public class Authorization :  ActionFilterAttribute, IAuthorizationFilter
     {
         private ITokenService _jwtService;

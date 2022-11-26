@@ -16,7 +16,6 @@ using TomTec.RoundBuy.Models;
 namespace TomTec.RoundBuy.API.Controllers.v1
 {
     [Route("v1/auth")]
-    [AllowAnonymous]
     [ServiceFilter(typeof(KeyNotFoundExceptionFilterAttribute))]
     [ServiceFilter(typeof(UnauthorizedAccessExceptionFilterAttribute))]
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
@@ -33,6 +32,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] LoginDto dto)
         {
             var user = _authService.GetUserByLogin(dto.UserNameOrEmail, dto.Password);
@@ -44,9 +44,9 @@ namespace TomTec.RoundBuy.API.Controllers.v1
                 value = new { token = jwtToken }
             });
         }
-
-        [Authorize]
+      
         [HttpGet("user")]
+        [Authorize]
         public IActionResult GetUser()
         {
             var userName = User.Identity.Name;
