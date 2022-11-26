@@ -8,7 +8,7 @@ using TomTec.RoundBuy.Lib.Utils;
 
 namespace TomTec.RoundBuy.Business
 {
-    public class JwtService : IJwtService
+    public class JwtService : ITokenService
     {
         private string _secretKey;
 

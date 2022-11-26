@@ -24,8 +24,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
     {
         private readonly IRepository<User> _userRepository;
         private readonly IAuthService _authService;
-        private readonly IJwtService _jwtService;
-        public AuthController(IRepository<User> userRepository, IAuthService authService, IJwtService jwtService)
+        private readonly ITokenService _jwtService;
+        public AuthController(IRepository<User> userRepository, IAuthService authService, ITokenService jwtService)
         {
             _userRepository = userRepository;
             _authService = authService;
@@ -36,12 +36,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         public IActionResult Login([FromBody] LoginDto dto)
         {
             var user = _authService.GetUserByLogin(dto.UserNameOrEmail, dto.Password);
-            string jwtToken = _jwtService.Generate(user.Id, user.UsersClaims.Select(c => c.ToSecurityClaim()));
-
-            Response.Cookies.Append("token", jwtToken, new CookieOptions
-            {
-                HttpOnly = true
-            });
+            string jwtToken = _jwtService.Generate(user.Id, _authService.GenerateSecurityClaims(user));
 
             return Ok(new
             {
@@ -50,26 +45,24 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [ServiceFilter(typeof(Authorization))]
+        [Authorize]
         [HttpGet("user")]
         public IActionResult GetUser()
         {
-            var jwtToken = Request.Cookies["token"];
-            var token = _jwtService.Verify(jwtToken);
-            int userId = int.Parse(token.Issuer);
-            var user = _userRepository.Get(userId);
+            var userName = User.Identity.Name;
+            var user = _userRepository.Get(u => u.UserName.Equals(userName)).FirstOrDefault();
 
             return Ok(user);
         }
 
-        [HttpPost("loggout")]
-        public IActionResult Loggout()
-        {
-            Response.Cookies.Delete("token");
-            return Ok(new
-            {
-                message = ResponseMessage.Success
-            });
-        }
+        //[HttpPost("loggout")]
+        //public IActionResult Loggout()
+        //{
+        //    Response.Cookies.Delete("token");
+        //    return Ok(new
+        //    {
+        //        message = ResponseMessage.Success
+        //    });
+        //}
     }
 }

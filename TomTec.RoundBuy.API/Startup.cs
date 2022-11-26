@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,9 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using TomTec.RoundBuy.Business;
 using TomTec.RoundBuy.Data;
@@ -34,10 +37,26 @@ namespace TomTec.RoundBuy.API
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("Secret"))),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
+            });
 
             services.AddScoped(typeof(IRepository<>), typeof(SQLRepository<>));
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<ITokenService, JwtService>();
 
             //Filters Handlings
             services.AddScoped<KeyNotFoundExceptionFilterAttribute>();
@@ -71,6 +90,7 @@ namespace TomTec.RoundBuy.API
                 .AllowCredentials()
             );
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

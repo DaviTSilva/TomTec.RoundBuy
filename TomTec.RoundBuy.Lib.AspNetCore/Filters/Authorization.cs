@@ -10,8 +10,8 @@ namespace TomTec.RoundBuy.Lib.AspNetCore.Filters
 {
     public class Authorization :  ActionFilterAttribute, IAuthorizationFilter
     {
-        private IJwtService _jwtService;
-        public Authorization(IJwtService jwtService) 
+        private ITokenService _jwtService;
+        public Authorization(ITokenService jwtService) 
         {
             _jwtService = jwtService;
         }
@@ -19,7 +19,7 @@ namespace TomTec.RoundBuy.Lib.AspNetCore.Filters
         {
             try
             {
-                var token = context.HttpContext.Request.Cookies["token"];
+                var token = context.HttpContext.Request.Headers["Authorization"];
 
                 if (string.IsNullOrEmpty(token))
                 {
