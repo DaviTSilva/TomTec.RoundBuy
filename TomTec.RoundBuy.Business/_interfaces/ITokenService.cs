@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TomTec.RoundBuy.Business
 {
-    public interface IJwtService
+    public interface ITokenService
     {
         public string Generate(int id, IEnumerable<Claim> claims);
         public JwtSecurityToken Verify(string jwtToken);

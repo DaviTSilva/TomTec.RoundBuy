@@ -14,7 +14,6 @@ using TomTec.RoundBuy.Models;
 namespace TomTec.RoundBuy.API.Controllers.v1
 {
     [Route("v1/profiles")]
-    [ServiceFilter(typeof(Authorization))]
     [ServiceFilter(typeof(KeyNotFoundExceptionFilterAttribute))]
     [ServiceFilter(typeof(UnauthorizedAccessExceptionFilterAttribute))]
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
@@ -27,8 +26,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
 
-        [AllowAnonymous]
         [HttpPost("")]
+        [AllowAnonymous]
         public IActionResult Register([FromBody] UserRegisterDto dto)
         {
             var user = _userRepository.Create(dto.ToModel());
@@ -36,6 +35,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpGet("")]
+        [Authorize]
         public IActionResult GetUsers()
         {
             var users = _userRepository.Get();
@@ -47,6 +47,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult GetUser(int id)
         {
             var user = _userRepository.Get(u => u.Id == id && u.Active == true);
@@ -58,6 +59,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpGet("username/{userName}")]
+        [Authorize]
         public IActionResult GetUserByUserName(string userName)
         {
             var user = _userRepository.Get(u => u.UserName == userName && u.Active == true).FirstOrDefault();
@@ -69,6 +71,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpGet("email/{email}")]
+        [Authorize]
         public IActionResult GetUserByEmail(string email)
         {
             var user = _userRepository.Get(u => u.Email == email && u.Active == true).FirstOrDefault();
@@ -80,6 +83,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "manager")]
         public IActionResult DeleteUser(int id)
         {
             var user = _userRepository.Get(id);
@@ -92,6 +96,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpPost("restore/{id}")]
+        [Authorize(Roles = "manager")]
         public IActionResult RestoreDeletedUser(int id)
         {
             var user = _userRepository.Get(id);
@@ -104,6 +109,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult UpdateUser([FromBody] UpdateProfileDto dto, int id)
         {
             User user = dto.ToModel();

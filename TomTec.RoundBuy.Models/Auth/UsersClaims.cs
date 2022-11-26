@@ -21,9 +21,9 @@ namespace TomTec.RoundBuy.Models
             ClaimId = claimId;
         }
 
-        public System.Security.Claims.Claim ToSecurityClaim()
-        {
-            return new System.Security.Claims.Claim(Claim.Name, UserId.ToString());
-        }
+        //public System.Security.Claims.Claim ToSecurityClaim()
+        //{
+        //    return new System.Security.Claims.Claim(ClaimTypes.Name, UserId.ToString());
+        //}
     }
 }

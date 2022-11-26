@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using TomTec.RoundBuy.Data;
 using TomTec.RoundBuy.Models;
 
@@ -38,6 +39,19 @@ namespace TomTec.RoundBuy.Business
             {
                 throw;
             }          
+        }
+
+        public IEnumerable<System.Security.Claims.Claim> GenerateSecurityClaims(User user)
+        {
+            var securityClaims = new List<System.Security.Claims.Claim>();
+
+            securityClaims.Add(new System.Security.Claims.Claim(ClaimTypes.Name, user.UserName));
+            foreach (var claim in user.UsersClaims)
+            {
+                securityClaims.Add(new System.Security.Claims.Claim(ClaimTypes.Role, claim.Claim.Name));
+            }
+
+            return securityClaims;
         }
     }
 }

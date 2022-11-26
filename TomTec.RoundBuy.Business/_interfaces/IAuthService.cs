@@ -8,5 +8,6 @@ namespace TomTec.RoundBuy.Business
     public interface IAuthService
     {
         public User GetUserByLogin(string userNameOrEmail, string password);
+        public IEnumerable<System.Security.Claims.Claim> GenerateSecurityClaims(User user);
     }
 }
