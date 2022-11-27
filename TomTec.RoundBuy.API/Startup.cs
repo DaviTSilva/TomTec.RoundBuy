@@ -57,6 +57,7 @@ namespace TomTec.RoundBuy.API
             services.AddScoped(typeof(IRepository<>), typeof(SQLRepository<>));
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, JwtService>();
+            services.AddScoped<IUsersClaimsRepository, UsersClaimsRepository>();
 
             //Filters Handlings
             services.AddScoped<KeyNotFoundExceptionFilterAttribute>();
