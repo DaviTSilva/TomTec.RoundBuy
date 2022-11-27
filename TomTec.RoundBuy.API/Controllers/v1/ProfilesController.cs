@@ -50,7 +50,12 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [Authorize]
         public IActionResult GetUser(int id)
         {
-            var user = _userRepository.Get(u => u.Id == id && u.Active == true);
+            var user = _userRepository.Get(u => u.Id == id && u.Active == true,
+                    nameof(Models.User.UsersClaims),
+                    $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
+                    nameof(Models.User.Address),
+                    nameof(Models.User.OfficialIdentificationType)
+                );
             return Ok(new
             {
                 message = ResponseMessage.Success,
@@ -62,7 +67,13 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [Authorize]
         public IActionResult GetUserByUserName(string userName)
         {
-            var user = _userRepository.Get(u => u.UserName == userName && u.Active == true).FirstOrDefault();
+            var user = _userRepository.Get(u => u.UserName == userName && u.Active == true,
+                    nameof(Models.User.UsersClaims),
+                    $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
+                    nameof(Models.User.Address),
+                    nameof(Models.User.OfficialIdentificationType)
+                ).FirstOrDefault();
+
             return Ok(new
             {
                 message = ResponseMessage.Success,
@@ -74,7 +85,13 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [Authorize]
         public IActionResult GetUserByEmail(string email)
         {
-            var user = _userRepository.Get(u => u.Email == email && u.Active == true).FirstOrDefault();
+            var user = _userRepository.Get(u => u.Email == email && u.Active == true,
+                    nameof(Models.User.UsersClaims),
+                    $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
+                    nameof(Models.User.Address),
+                    nameof(Models.User.OfficialIdentificationType)
+                ).FirstOrDefault();
+
             return Ok(new
             {
                 message = ResponseMessage.Success,
@@ -86,7 +103,13 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [Authorize(Roles = "manager")]
         public IActionResult DeleteUser(int id)
         {
-            var user = _userRepository.Get(id);
+            var user = _userRepository.Get(id,
+                    nameof(Models.User.UsersClaims),
+                    $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
+                    nameof(Models.User.Address),
+                    nameof(Models.User.OfficialIdentificationType)
+                ); 
+
             user.Active = false;
             _userRepository.Update(user);
             return Ok(new
@@ -99,7 +122,13 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [Authorize(Roles = "manager")]
         public IActionResult RestoreDeletedUser(int id)
         {
-            var user = _userRepository.Get(id);
+            var user = _userRepository.Get(id,
+                    nameof(Models.User.UsersClaims),
+                    $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
+                    nameof(Models.User.Address),
+                    nameof(Models.User.OfficialIdentificationType)
+                );
+
             user.Active = true;
             _userRepository.Update(user);
             return Ok(new
@@ -115,7 +144,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             User user = dto.ToModel();
             user.Id = id;
 
-            var initialUser = _userRepository.Get(id);
+            var initialUser = _userRepository.Get(id, nameof(Models.User.UsersClaims));
             user.Password = initialUser.Password;
             user.PasswordSalt = initialUser.PasswordSalt;
             _userRepository.Update(user);

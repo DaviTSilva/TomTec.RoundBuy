@@ -12,6 +12,7 @@ using TomTec.RoundBuy.Models;
 
 namespace TomTec.RoundBuy.API.Controllers.v1
 {
+    [Route("v1/claims")]
     [ServiceFilter(typeof(KeyNotFoundExceptionFilterAttribute))]
     [ServiceFilter(typeof(UnauthorizedAccessExceptionFilterAttribute))]
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
@@ -20,9 +21,10 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         private readonly IRepository<Claim> _claimsRepository;
         private readonly IUsersClaimsRepository _userClaimsRepository;
 
-        public ClaimsController(IRepository<Claim> uerRoleRepository)
+        public ClaimsController(IRepository<Claim> uerRoleRepository, IUsersClaimsRepository userClaimsRepository)
         {
             _claimsRepository = uerRoleRepository;
+            _userClaimsRepository = userClaimsRepository;
         }
 
         [HttpPost("")]

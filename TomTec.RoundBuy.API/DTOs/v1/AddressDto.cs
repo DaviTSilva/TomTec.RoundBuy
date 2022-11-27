@@ -18,7 +18,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
 
         public string City { get; set; }
 
-        public string State { get; set; }
+        public string StateOrProvince { get; set; }
 
         public string CountryName { get; set; }
 
@@ -31,7 +31,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                 AdditionalInformation = this.AdditionalInformation,
                 PostalCode = this.PostalCode,
                 City = this.City,
-                State = this.State,
+                StateOrProvince = this.StateOrProvince,
                 CountryName = this.CountryName
             };
         }

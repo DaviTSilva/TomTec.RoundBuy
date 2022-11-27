@@ -12,6 +12,7 @@ using TomTec.RoundBuy.Models;
 
 namespace TomTec.RoundBuy.API.Controllers.v1
 {
+    [Route("v1/official-identification-types")]
     [ServiceFilter(typeof(KeyNotFoundExceptionFilterAttribute))]
     [ServiceFilter(typeof(UnauthorizedAccessExceptionFilterAttribute))]
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
