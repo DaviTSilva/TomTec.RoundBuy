@@ -33,5 +33,9 @@
     <ProjectReference Include="..\TomTec.RoundBuy.Lib.AspNetCore\TomTec.RoundBuy.Lib.AspNetCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\v1\Sales\" />
+  </ItemGroup>
+
 
 </Project>

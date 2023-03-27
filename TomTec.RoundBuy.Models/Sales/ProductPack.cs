@@ -4,12 +4,12 @@ using System.Text;
 
 namespace TomTec.RoundBuy.Models
 {
-    public class Comment : BaseEntity
+    public class ProductPack : BaseEntity
     {
-        public User AuthorUser { get; set; }
-        public int AuthorUserId { get; set; }
         public Announcement Announcement { get; set; }
         public int AnnouncementId { get; set; }
-        public string CommentText { get; set; }
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }

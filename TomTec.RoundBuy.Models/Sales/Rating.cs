@@ -8,6 +8,8 @@ namespace TomTec.RoundBuy.Models
     {
         public User AuthorUser { get; set; }
         public int AuthorUserId { get; set; }
+        public Announcement Announcement { get; set; }
+        public int AnnouncementId { get; set; }
         public string CommentText { get; set; }
         public string Pros { get; set; }
         public string Cons { get; set; }

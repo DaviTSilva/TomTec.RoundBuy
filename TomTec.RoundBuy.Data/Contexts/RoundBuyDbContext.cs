@@ -46,13 +46,36 @@ namespace TomTec.RoundBuy.Data
                 .HasOne(bc => bc.Claim)
                 .WithMany(c => c.UsersClaims)
                 .HasForeignKey(bc => bc.ClaimId);
+
+            modelBuilder.Entity<OrderProducts>()
+                .HasKey(op => new { op.OrderId, op.ProductId });
+            modelBuilder.Entity<OrderProducts>()
+                .HasOne(op => op.Order)
+                .WithMany(o => o.OrderProducts)
+                .HasForeignKey(op2 => op2.OrderId);
+            modelBuilder.Entity<OrderProducts>()
+                .HasOne(op => op.Product)
+                .WithMany(p => p.OrderProducts)
+                .HasForeignKey(op2 => op2.ProductId);
         }
 
+        //Auth
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Claim> Claims { get; set; }
         public DbSet<UsersClaims> UsersClaims { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<OfficialIdentificationType> OfficialIdentificationTypes { get; set; }
+
+        //Sales
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderProducts> OrderProducts { get; set; }
+        public DbSet<Payment> Payment { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<ProductPack> ProductPacks { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }
