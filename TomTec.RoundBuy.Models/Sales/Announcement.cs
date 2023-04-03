@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace TomTec.RoundBuy.Models
     {
         public User AdvertiserUser { get; set; }
         public int AdvertiserUserId { get; set; }
+
+        [Column(TypeName = "varchar(120)")]
+        [Required]
         public string Title { get; set; }
         public Address AlternativeAddress { get; set; }
         public int AlternativeAddressId { get; set; }

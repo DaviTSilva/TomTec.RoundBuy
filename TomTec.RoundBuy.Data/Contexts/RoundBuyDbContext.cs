@@ -25,17 +25,48 @@ namespace TomTec.RoundBuy.Data
             options.UseSqlServer(Configuration.GetConnectionString("RoundBuyDB"), b => b.MigrationsAssembly("TomTec.RoundBuy.API"));
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //foreach(var reationhip in modelBuilder.Model.GetEntityTypes())
-            //{
+            SetUpUniqueValues(modelBuilder);
+            SetUpManyToManyRelationships(modelBuilder);
+            SetUpOnDeleteMethod(modelBuilder);
+        }
 
-            //}
-            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
-            modelBuilder.Entity<Claim>().HasIndex(r => r.Name).IsUnique();
-            modelBuilder.Entity<UserType>().HasIndex(ut => ut.Name).IsUnique();
+        private static void SetUpOnDeleteMethod(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Announcement>()
+                .HasOne(a => a.AlternativeAddress)
+                .WithMany()
+                .HasForeignKey(a2 => a2.AlternativeAddressId)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Announcement>()
+                .HasOne(a => a.AdvertiserUser)
+                .WithMany()
+                .HasForeignKey(a2 => a2.AdvertiserUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.BuyerUser)
+                .WithMany()
+                .HasForeignKey(o2 => o2.BuyerUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.AuthorUser)
+                .WithMany()
+                .HasForeignKey(c2 => c2.AuthorUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Rating>()
+                .HasOne(r => r.AuthorUser)
+                .WithMany()
+                .HasForeignKey(r2 => r2.AuthorUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+
+        private static void SetUpManyToManyRelationships(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<UsersClaims>()
                 .HasKey(uc => new { uc.UserId, uc.ClaimId });
             modelBuilder.Entity<UsersClaims>()
@@ -57,6 +88,15 @@ namespace TomTec.RoundBuy.Data
                 .HasOne(op => op.Product)
                 .WithMany(p => p.OrderProducts)
                 .HasForeignKey(op2 => op2.ProductId);
+        }
+
+        private static void SetUpUniqueValues(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
+            modelBuilder.Entity<Claim>().HasIndex(r => r.Name).IsUnique();
+            modelBuilder.Entity<UserType>().HasIndex(ut => ut.Name).IsUnique();
+            modelBuilder.Entity<PaymentMethod>().HasIndex(ut => ut.Name).IsUnique();
         }
 
         //Auth
