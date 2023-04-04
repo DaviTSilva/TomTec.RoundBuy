@@ -32,6 +32,41 @@ namespace TomTec.RoundBuy.Data
             SetUpOnDeleteMethod(modelBuilder);
         }
 
+        #region SetUp Methods
+        private static void SetUpUniqueValues(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
+            modelBuilder.Entity<Claim>().HasIndex(r => r.Name).IsUnique();
+            modelBuilder.Entity<UserType>().HasIndex(ut => ut.Name).IsUnique();
+            modelBuilder.Entity<PaymentMethod>().HasIndex(ut => ut.Name).IsUnique();
+        }
+
+        private static void SetUpManyToManyRelationships(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UsersClaims>()
+                .HasKey(uc => new { uc.UserId, uc.ClaimId });
+            modelBuilder.Entity<UsersClaims>()
+                .HasOne(uc => uc.User)
+                .WithMany(b => b.UsersClaims)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<UsersClaims>()
+                .HasOne(bc => bc.Claim)
+                .WithMany(c => c.UsersClaims)
+                .HasForeignKey(bc => bc.ClaimId);
+
+            modelBuilder.Entity<OrderProducts>()
+                .HasKey(op => new { op.OrderId, op.ProductId });
+            modelBuilder.Entity<OrderProducts>()
+                .HasOne(op => op.Order)
+                .WithMany(o => o.OrderProducts)
+                .HasForeignKey(op2 => op2.OrderId);
+            modelBuilder.Entity<OrderProducts>()
+                .HasOne(op => op.Product)
+                .WithMany(p => p.OrderProducts)
+                .HasForeignKey(op2 => op2.ProductId);
+        }
+
         private static void SetUpOnDeleteMethod(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Announcement>()
@@ -64,41 +99,9 @@ namespace TomTec.RoundBuy.Data
                 .HasForeignKey(r2 => r2.AuthorUserId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
+        #endregion
 
-        private static void SetUpManyToManyRelationships(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UsersClaims>()
-                .HasKey(uc => new { uc.UserId, uc.ClaimId });
-            modelBuilder.Entity<UsersClaims>()
-                .HasOne(uc => uc.User)
-                .WithMany(b => b.UsersClaims)
-                .HasForeignKey(bc => bc.UserId);
-            modelBuilder.Entity<UsersClaims>()
-                .HasOne(bc => bc.Claim)
-                .WithMany(c => c.UsersClaims)
-                .HasForeignKey(bc => bc.ClaimId);
-
-            modelBuilder.Entity<OrderProducts>()
-                .HasKey(op => new { op.OrderId, op.ProductId });
-            modelBuilder.Entity<OrderProducts>()
-                .HasOne(op => op.Order)
-                .WithMany(o => o.OrderProducts)
-                .HasForeignKey(op2 => op2.OrderId);
-            modelBuilder.Entity<OrderProducts>()
-                .HasOne(op => op.Product)
-                .WithMany(p => p.OrderProducts)
-                .HasForeignKey(op2 => op2.ProductId);
-        }
-
-        private static void SetUpUniqueValues(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
-            modelBuilder.Entity<Claim>().HasIndex(r => r.Name).IsUnique();
-            modelBuilder.Entity<UserType>().HasIndex(ut => ut.Name).IsUnique();
-            modelBuilder.Entity<PaymentMethod>().HasIndex(ut => ut.Name).IsUnique();
-        }
-
+        #region DbSets
         //Auth
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -117,5 +120,6 @@ namespace TomTec.RoundBuy.Data
         public DbSet<ProductPack> ProductPacks { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        #endregion
     }
 }

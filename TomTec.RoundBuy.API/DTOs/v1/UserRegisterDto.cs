@@ -45,7 +45,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                 PasswordSalt = salt,
                 UserTypeId = this.UserTypeId,
                 BirthDate = this.BirthDate,
-                ProfileImage = new Image()
+                Image = new Image()
                 {
                     Url = this.ProfilePictureURL,
                     AltText = string.Concat(this.UserName, "`s profile picture")

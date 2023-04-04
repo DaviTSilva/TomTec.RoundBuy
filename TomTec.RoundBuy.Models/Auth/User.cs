@@ -31,9 +31,8 @@ namespace TomTec.RoundBuy.Models
         [Column(TypeName = "datetime")]
         public DateTime BirthDate { get; set; }
 
-        public int ProfileImageId { get; set; }
-
-        public Image ProfileImage { get; set; }
+        public Image Image { get; set; }
+        public int ImageId { get; set; }
 
         public Address Address { get; set; }
 

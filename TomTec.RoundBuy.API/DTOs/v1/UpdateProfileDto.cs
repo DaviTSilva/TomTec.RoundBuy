@@ -31,7 +31,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                 Email = this.Email,
                 UserTypeId = this.UserTypeId,
                 BirthDate = this.BirthDate,
-                ProfileImage = new Image() 
+                Image = new Image() 
                 { 
                     Url = this.ProfilePictureURL,
                     AltText = string.Concat(this.UserName, "`s profile picture")
