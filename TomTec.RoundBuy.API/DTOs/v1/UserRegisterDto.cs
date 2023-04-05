@@ -48,7 +48,8 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                 Image = new Image()
                 {
                     Url = this.ProfilePictureURL,
-                    AltText = string.Concat(this.UserName, "`s profile picture")
+                    AltText = string.Concat(this.UserName, "`s profile picture"),
+                    CreationDate = DateTime.UtcNow,
                 },
                 OfficialIdentificationTypeId = OfficialIdentificationTypeId,
                 OfficialIdentification = OfficialIdentitification,

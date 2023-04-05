@@ -24,10 +24,10 @@ namespace TomTec.RoundBuy.Models
         public ICollection<ProductPack> ProductPacks { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Rating> Ratings { get; set; }
-        public int MinimalSaleQuantity { get; set; } 
-        public bool IsActive { get; set; }
-        public bool IsAvailable { get; set; }
-        public bool IsAllSold { get; set; }
+        public int MinimalSaleQuantity { get; set; }
+        public bool IsActive { get; set; } = true;
+        public bool IsAvailable { get; set; } = true;
+        public bool IsAllSold { get; set; } = false;
 
         [NotMapped]
         public int TotalProducts { get { return this.ProductPacks.Select(x => x.Quantity).Sum(); } }

@@ -16,11 +16,11 @@ namespace TomTec.RoundBuy.API.Controllers.v1
     [ServiceFilter(typeof(KeyNotFoundExceptionFilterAttribute))]
     [ServiceFilter(typeof(UnauthorizedAccessExceptionFilterAttribute))]
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
-    public class PaymentMethodController : Controller
+    public class PaymentMethodsController : Controller
     {
         private readonly IRepository<PaymentMethod> _paymentMethodRepository;
 
-        public PaymentMethodController(IRepository<PaymentMethod> paymentMethodRepository)
+        public PaymentMethodsController(IRepository<PaymentMethod> paymentMethodRepository)
         {
             _paymentMethodRepository = paymentMethodRepository;
         }
