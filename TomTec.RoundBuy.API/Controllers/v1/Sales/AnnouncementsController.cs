@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TomTec.RoundBuy.API.DTOs.v1;
 using TomTec.RoundBuy.Business;
@@ -19,20 +20,20 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
     public class AnnouncementsController : Controller
     {
         private readonly IRepository<Announcement> _announcementRepository;
-        private readonly IRepository<User> _userRepository;
         private readonly IAnnouncementService _announcementService;
+        private readonly IAuthService _authService;
 
-        public AnnouncementsController(IRepository<Announcement> announcementRepository, IRepository<User> userRepository, IAnnouncementService announcementService)
+        public AnnouncementsController(IRepository<Announcement> announcementRepository, IAnnouncementService announcementService, IAuthService authService)
         {
             _announcementRepository = announcementRepository;
-            _userRepository = userRepository;
             _announcementService = announcementService;
+            _authService = authService;
         }
 
         [HttpPost("")]
         public IActionResult CreateAnnouncement([FromBody] AnnouncementDto announcementDto)
         {
-            var announcement = _announcementRepository.Create(announcementDto.ToModel(GetCurrentUserId()));
+            var announcement = _announcementRepository.Create(announcementDto.ToModel(_authService.GetCurrentUserId(User)));
 
             return Created(ResponseMessage.Success, announcement);
         }
@@ -60,10 +61,10 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         [HttpPut("{id}")]
         public IActionResult UpdateAnnouncemnt(int id, [FromBody] AnnouncementDto announcementDto)
         {
-            if(_announcementRepository.Get(id).AdvertiserUserId != GetCurrentUserId())
+            if(_announcementRepository.Get(id).AdvertiserUserId != _authService.GetCurrentUserId(User))
                 throw new UnauthorizedAccessException();
 
-            var announcement = announcementDto.ToModel(GetCurrentUserId());
+            var announcement = announcementDto.ToModel(_authService.GetCurrentUserId(User));
             announcement.Id = id;
             _announcementRepository.Update(announcement);
 
@@ -77,7 +78,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         public IActionResult DeleteAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);
-            if (announcement.AdvertiserUserId != GetCurrentUserId())
+            if (announcement.AdvertiserUserId != _authService.GetCurrentUserId(User))
                 throw new UnauthorizedAccessException();
 
             announcement.IsActive = false;
@@ -93,7 +94,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         public IActionResult ReactivateAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);
-            if (announcement.AdvertiserUserId != GetCurrentUserId())
+            if (announcement.AdvertiserUserId != _authService.GetCurrentUserId(User))
                 throw new UnauthorizedAccessException();
 
             announcement.IsActive = true;
@@ -105,11 +106,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             });
         }
 
-        private int GetCurrentUserId()
-        {
-            var userName = User.Identity.Name;
-            var userId = _userRepository.Get(u => u.UserName.Equals(userName)).FirstOrDefault().Id;
-            return userId;
-        }
+        
     }
 }

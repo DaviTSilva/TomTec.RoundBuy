@@ -53,5 +53,12 @@ namespace TomTec.RoundBuy.Business
 
             return securityClaims;
         }
+
+        public int GetCurrentUserId(ClaimsPrincipal CurrentUser)
+        {
+            var userName = CurrentUser.Identity.Name;
+            var id = _userRepository.Get(u => u.UserName.Equals(userName)).FirstOrDefault().Id;
+            return id;
+        }
     }
 }
