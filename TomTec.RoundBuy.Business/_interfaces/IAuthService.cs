@@ -10,6 +10,6 @@ namespace TomTec.RoundBuy.Business
     {
         public User GetUserByLogin(string userNameOrEmail, string password);
         public IEnumerable<System.Security.Claims.Claim> GenerateSecurityClaims(User user);
-        public int GetCurrentUserId(ClaimsPrincipal CurrentUser);
+        public User GetCurrentUser(ClaimsPrincipal CurrentUser);
     }
 }

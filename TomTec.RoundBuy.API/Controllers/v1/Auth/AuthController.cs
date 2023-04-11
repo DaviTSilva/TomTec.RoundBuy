@@ -49,10 +49,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [Authorize]
         public IActionResult GetUser()
         {
-            var userName = User.Identity.Name;
-            var user = _userRepository.Get(u => u.UserName.Equals(userName)).FirstOrDefault();
-
-            return Ok(user);
+            return Ok(_authService.GetCurrentUser(User));
         }
 
         //[HttpPost("loggout")]

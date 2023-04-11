@@ -33,7 +33,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         [HttpPost("")]
         public IActionResult CreateAnnouncement([FromBody] AnnouncementDto announcementDto)
         {
-            var announcement = _announcementRepository.Create(announcementDto.ToModel(_authService.GetCurrentUserId(User)));
+            var announcement = _announcementRepository.Create(announcementDto.ToModel(_authService.GetCurrentUser(User).Id));
 
             return Created(ResponseMessage.Success, announcement);
         }
@@ -61,10 +61,10 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         [HttpPut("{id}")]
         public IActionResult UpdateAnnouncemnt(int id, [FromBody] AnnouncementDto announcementDto)
         {
-            if(_announcementRepository.Get(id).AdvertiserUserId != _authService.GetCurrentUserId(User))
+            if(_announcementRepository.Get(id).AdvertiserUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();
 
-            var announcement = announcementDto.ToModel(_authService.GetCurrentUserId(User));
+            var announcement = announcementDto.ToModel(_authService.GetCurrentUser(User).Id);
             announcement.Id = id;
             _announcementRepository.Update(announcement);
 
@@ -78,7 +78,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         public IActionResult DeleteAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);
-            if (announcement.AdvertiserUserId != _authService.GetCurrentUserId(User))
+            if (announcement.AdvertiserUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();
 
             announcement.IsActive = false;
@@ -94,7 +94,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         public IActionResult ReactivateAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);
-            if (announcement.AdvertiserUserId != _authService.GetCurrentUserId(User))
+            if (announcement.AdvertiserUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();
 
             announcement.IsActive = true;
