@@ -10,10 +10,14 @@ namespace TomTec.RoundBuy.Business
     public class AnnouncementService : IAnnouncementService
     {
         private readonly IRepository<Announcement> _announcementRepository;
+        private readonly IRepository<Order> _orderRepository;
+        private readonly IOrderProductsRepository _orderProductsRepository;
 
-        public AnnouncementService(IRepository<Announcement> announcementRepository)
+        public AnnouncementService(IRepository<Announcement> announcementRepository, IRepository<Order> orderRepository, IOrderProductsRepository orderProductsRepository)
         {
             _announcementRepository = announcementRepository;
+            _orderRepository = orderRepository;
+            _orderProductsRepository = orderProductsRepository;
         }
 
         public IEnumerable<Announcement> GetAnnouncements(string shearchText = "", double? minimalPrice = 0, double? maximumPrice = double.MaxValue)
@@ -52,6 +56,19 @@ namespace TomTec.RoundBuy.Business
                 continue;
             }
             return false;
+        }
+
+        public int GetSoldProductsCounter(int announcementId)
+        {
+            var announcement = _announcementRepository.Get(announcementId, $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}");
+            int counter = 0;
+
+            foreach (var productPack in announcement.ProductPacks)
+            {
+                _orderProductsRepository.GetByProductId(productPack.ProductId).Select(x => counter++);
+            }
+
+            return counter;
         }
     }
 }

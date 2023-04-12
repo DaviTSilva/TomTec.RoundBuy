@@ -21,12 +21,10 @@ namespace TomTec.RoundBuy.API.Controllers.v1
     [ServiceFilter(typeof(GenericExceptionFilterAttribute))]
     public class AuthController : Controller
     {
-        private readonly IRepository<User> _userRepository;
         private readonly IAuthService _authService;
         private readonly ITokenService _jwtService;
-        public AuthController(IRepository<User> userRepository, IAuthService authService, ITokenService jwtService)
+        public AuthController(IAuthService authService, ITokenService jwtService)
         {
-            _userRepository = userRepository;
             _authService = authService;
             _jwtService = jwtService;
         }

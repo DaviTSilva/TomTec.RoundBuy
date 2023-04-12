@@ -106,6 +106,14 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             });
         }
 
-        
+        [HttpGet("{id}/sold-products-counter")]
+        public IActionResult GetSoldProductsCounter(int id)
+        {
+            return Ok(new 
+            {
+                message = ResponseMessage.Success,
+                value = _announcementService.GetSoldProductsCounter(id),
+            });
+        }
     }
 }
