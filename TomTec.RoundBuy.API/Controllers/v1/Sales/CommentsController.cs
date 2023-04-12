@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,9 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             var comment = _commentRepository.Get(id);
             comment.CommentText = commentDto.CommentText;
 
+            if (comment.AuthorUserId != _authService.GetCurrentUser(User).Id)
+                throw new UnauthorizedAccessException();
+
             _commentRepository.Update(comment);
 
             return Ok(new {
@@ -68,6 +72,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
+        [Authorize(Roles = "manager")]
         [HttpDelete("{id}")]
         public IActionResult DeleteComment(int id)
         {
