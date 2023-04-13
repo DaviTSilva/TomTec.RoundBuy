@@ -13,6 +13,14 @@ namespace TomTec.RoundBuy.Business
         private readonly IRepository<Order> _orderRepository;
         private readonly IOrderProductsRepository _orderProductsRepository;
 
+        private readonly string[] includes = new string[]{
+                    $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}.{nameof(Product.Images)}",
+                    $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}",
+                    $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}.{nameof(Product.OrderProducts)}",
+                    $"{nameof(Announcement.Ratings)}",
+                    $"{nameof(Announcement.Comments)}",
+                };
+
         public AnnouncementService(IRepository<Announcement> announcementRepository, IRepository<Order> orderRepository, IOrderProductsRepository orderProductsRepository)
         {
             _announcementRepository = announcementRepository;
@@ -22,6 +30,8 @@ namespace TomTec.RoundBuy.Business
 
         public IEnumerable<Announcement> GetAnnouncements(string shearchText = "", double? minimalPrice = 0, double? maximumPrice = double.MaxValue)
         {
+            minimalPrice = minimalPrice == null ? 0 : minimalPrice;
+            maximumPrice = maximumPrice == null ? double.MaxValue : maximumPrice;
             Func<Announcement, bool> query;
 
             if (!string.IsNullOrEmpty(shearchText))
@@ -44,7 +54,7 @@ namespace TomTec.RoundBuy.Business
                     && IsAnyTrue(x.ProductPacks.Select(p => p.Product.Price < maximumPrice));
             }
                 
-            return _announcementRepository.Get(query);
+            return _announcementRepository.Get(query, includes);
         }
 
         private bool IsAnyTrue(IEnumerable<bool> values)
@@ -60,12 +70,20 @@ namespace TomTec.RoundBuy.Business
 
         public int GetSoldProductsCounter(int announcementId)
         {
-            var announcement = _announcementRepository.Get(announcementId, $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}");
+            var announcement = _announcementRepository.Get(announcementId, includes);
             int counter = 0;
 
             foreach (var productPack in announcement.ProductPacks)
             {
-                _orderProductsRepository.GetByProductId(productPack.ProductId).Select(x => counter++);
+                try
+                {
+                    _orderProductsRepository.GetByProductId(productPack.ProductId).Select(x => counter++);
+                }
+                catch (KeyNotFoundException)
+                {
+                    continue;
+                }
+               
             }
 
             return counter;

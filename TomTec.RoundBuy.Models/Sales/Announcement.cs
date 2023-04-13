@@ -16,7 +16,7 @@ namespace TomTec.RoundBuy.Models
         [Required]
         public string Title { get; set; }
         public Address AlternativeAddress { get; set; }
-        public int AlternativeAddressId { get; set; }
+        public int? AlternativeAddressId { get; set; }
 
         [Column(TypeName = "varchar(max)")]
         public string Description { get; set; }
@@ -30,9 +30,9 @@ namespace TomTec.RoundBuy.Models
         public bool IsAllSold { get; set; } = false;
 
         [NotMapped]
-        public int TotalProducts { get { return this.ProductPacks.Select(x => x.Quantity).Sum(); } }
+        public int? TotalProducts { get { return this.ProductPacks == null || this.ProductPacks.Count == 0? 0 : this.ProductPacks.Select(x => x.Quantity).Sum(); } }
 
         [NotMapped]
-        public double AverageRate { get { return this.Ratings.Select(x => x.Rate).Average(); } }
+        public double? AverageRate { get { return this.Ratings == null || this.Ratings.Count == 0? 0 : this.Ratings.Select(x => x.Rate).Average(); } }
     }
 }

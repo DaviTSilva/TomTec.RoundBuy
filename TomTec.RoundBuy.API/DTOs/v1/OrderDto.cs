@@ -21,7 +21,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
             {
                 BuyerUserId = buyerUserId,
                 AnnouncementId = this.AnnouncementId,
-                ValueWithouDiscont = this.ValueWithoutDiscount,
+                ValueWithouDiscount = this.ValueWithoutDiscount,
                 DiscountPorcentage = this.DiscountPorcentage,
                 IsParcelated = this.IsParcelated,
                 ParcelsQuantity = this.ParcelsQuantity,

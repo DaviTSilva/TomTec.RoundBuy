@@ -58,6 +58,7 @@ namespace TomTec.RoundBuy.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, JwtService>();
             services.AddScoped<IUsersClaimsRepository, UsersClaimsRepository>();
+            services.AddScoped<IOrderProductsRepository, OrderProductsRepository>();
             services.AddScoped<IAnnouncementService, AnnouncementService>();
 
             //Filters Handlings

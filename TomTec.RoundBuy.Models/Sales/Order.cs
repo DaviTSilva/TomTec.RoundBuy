@@ -11,10 +11,10 @@ namespace TomTec.RoundBuy.Models
         public Announcement Announcement { get; set; }
         public int AnnouncementId { get; set; }
         public ICollection<OrderProducts> OrderProducts { get; set; }
-        public double ValueWithouDiscont { get; set; }
+        public double ValueWithouDiscount { get; set; }
         public double DiscountPorcentage { get; set; }
-        public double DiscountValue { get { return ValueWithouDiscont * DiscountPorcentage; } }
-        public double FinalValue { get { return ValueWithouDiscont - DiscountValue; } }
+        public double DiscountValue { get { return ValueWithouDiscount * DiscountPorcentage; } }
+        public double FinalValue { get { return ValueWithouDiscount - DiscountValue; } }
         public bool IsParcelated { get; set; }
         public int ParcelsQuantity { get; set; }
     }

@@ -7,7 +7,7 @@ using TomTec.RoundBuy.Models;
 
 namespace TomTec.RoundBuy.Data
 {
-    public class OrderProductsRepository
+    public class OrderProductsRepository : IOrderProductsRepository
     {
         private readonly RoundBuyDbContext _dbContext;
         public OrderProductsRepository(RoundBuyDbContext context)

@@ -25,19 +25,19 @@ namespace TomTec.RoundBuy.API.DTOs.v1
         {
             var productPacks = new List<ProductPack>();
 
-            var MainTechnicalInfos = (ICollection<TechnicalInfo>)this.MainProduct.TechnicalInfos.Select(x => new TechnicalInfo()
+            ICollection<TechnicalInfo> mainTechnicalInfos = (ICollection<TechnicalInfo>)this.MainProduct.TechnicalInfos.Select(x => new TechnicalInfo()
             {
                 Title = x.Title,
                 InfoSeparetedBySemicolon = x.InfoSeparetedBySemicolon,
                 CreationDate = DateTime.UtcNow
-            });
+            }).ToList();
 
-            var mainImages = (ICollection<Image>)this.MainProduct.Images.Select(x => new Image()
+            ICollection<Image> mainImages = (ICollection<Image>)this.MainProduct.Images.Select(x => new Image()
             {
                 AltText = x.AltText,
                 Url = x.Url,
                 CreationDate = DateTime.UtcNow,
-            });
+            }).ToList();
 
             productPacks.Add(new ProductPack() 
             {
@@ -49,10 +49,11 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                     Color = this.MainProduct.Color,
                     Price = this.MainProduct.Price,
                     IsSold = false,
-                    TechnicalInfos = MainTechnicalInfos,
+                    TechnicalInfos = mainTechnicalInfos,
                     Images = mainImages,
                     CreationDate = DateTime.UtcNow,
                 },
+                CreationDate = DateTime.UtcNow,
             });
 
             if (this.Products.Count > 0)
@@ -67,8 +68,8 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                         Color = string.IsNullOrEmpty(x.Color)? this.MainProduct.Color : x.Color,
                         Price = x.Price == 0? this.MainProduct.Price : x.Price,
                         IsSold = false,
-                        TechnicalInfos = MainTechnicalInfos,
-                        Images = x.Images.Count == 0? mainImages : (ICollection<Image>)x.Images.Select(y => new Image()
+                        TechnicalInfos = mainTechnicalInfos,
+                        Images = x.Images == null? mainImages : (ICollection<Image>)x.Images.Select(y => new Image()
                         {
                             AltText = y.AltText,
                             Url = y.Url,
@@ -84,7 +85,8 @@ namespace TomTec.RoundBuy.API.DTOs.v1
             {
                 AdvertiserUserId = userId,
                 Title = this.Title,
-                AlternativeAddress = string.IsNullOrEmpty(this.AlternativeAddressSteet)? 
+                Description = this.Description,
+                AlternativeAddress = !string.IsNullOrEmpty(this.AlternativeAddressSteet)? 
                     new Address() 
                     { 
                         Street = this.AlternativeAddressSteet,
