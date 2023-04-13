@@ -46,7 +46,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [HttpGet("/announcement/{id}")]
+        [HttpGet("announcement/{announcementId}")]
         public IActionResult GetCommentByAnnouncement(int announcementId)
         {
             return Ok(new

@@ -9,5 +9,6 @@ namespace TomTec.RoundBuy.Business
     {
         public IEnumerable<Announcement> GetAnnouncements(string shearchText = "", double? minimalPrice = 0, double? maximumPrice = double.MaxValue);
         public int GetSoldProductsCounter(int announcementId);
+        public string[] Includes { get; }
     }
 }

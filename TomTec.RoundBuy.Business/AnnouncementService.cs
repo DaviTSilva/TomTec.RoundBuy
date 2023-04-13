@@ -13,13 +13,17 @@ namespace TomTec.RoundBuy.Business
         private readonly IRepository<Order> _orderRepository;
         private readonly IOrderProductsRepository _orderProductsRepository;
 
-        private readonly string[] includes = new string[]{
+        public string[] Includes { get {
+                return new string[]{
                     $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}.{nameof(Product.Images)}",
                     $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}",
                     $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}.{nameof(Product.OrderProducts)}",
                     $"{nameof(Announcement.Ratings)}",
+                    $"{nameof(Announcement.Ratings)}.{nameof(Rating.AuthorUser)}",
                     $"{nameof(Announcement.Comments)}",
+                    $"{nameof(Announcement.Comments)}.{nameof(Comment.AuthorUser)}",
                 };
+            } } 
 
         public AnnouncementService(IRepository<Announcement> announcementRepository, IRepository<Order> orderRepository, IOrderProductsRepository orderProductsRepository)
         {
@@ -54,7 +58,7 @@ namespace TomTec.RoundBuy.Business
                     && IsAnyTrue(x.ProductPacks.Select(p => p.Product.Price < maximumPrice));
             }
                 
-            return _announcementRepository.Get(query, includes);
+            return _announcementRepository.Get(query, Includes);
         }
 
         private bool IsAnyTrue(IEnumerable<bool> values)
@@ -70,7 +74,7 @@ namespace TomTec.RoundBuy.Business
 
         public int GetSoldProductsCounter(int announcementId)
         {
-            var announcement = _announcementRepository.Get(announcementId, includes);
+            var announcement = _announcementRepository.Get(announcementId, Includes);
             int counter = 0;
 
             foreach (var productPack in announcement.ProductPacks)

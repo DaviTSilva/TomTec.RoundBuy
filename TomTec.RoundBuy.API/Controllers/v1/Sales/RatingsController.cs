@@ -48,7 +48,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             });
         }
 
-        [HttpGet("announcement/{id}")]
+        [HttpGet("announcement/{announcementId}")]
         public IActionResult GetRatingByAnnouncement(int announcementId)
         {
             return Ok(new
@@ -59,10 +59,10 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateComment([FromBody] UpdateCommentDto commentDto, int id)
+        public IActionResult UpdateRating([FromBody] UpdateRatingDto ratingDto, int id)
         {
             var rating = _ratingRepository.Get(id);
-            rating.CommentText = commentDto.CommentText;
+            ratingDto.UpdateModel(rating);
 
             if (rating.AuthorUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();
@@ -77,7 +77,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "manager")]
-        public IActionResult DeleteComment(int id)
+        public IActionResult DeleteRating(int id)
         {
             _ratingRepository.Delete(id);
 

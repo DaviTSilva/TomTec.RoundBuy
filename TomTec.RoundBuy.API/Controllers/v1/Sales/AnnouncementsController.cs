@@ -23,14 +23,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         private readonly IAnnouncementService _announcementService;
         private readonly IAuthService _authService;
 
-        private readonly string[] includes = new string[]{
-                    $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}.{nameof(Product.Images)}",
-                    $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}",
-                    $"{nameof(Announcement.ProductPacks)}.{nameof(ProductPack.Product)}.{nameof(Product.OrderProducts)}",
-                    $"{nameof(Announcement.Ratings)}",
-                    $"{nameof(Announcement.Comments)}",
-                };
-
         public AnnouncementsController(IRepository<Announcement> announcementRepository, IAnnouncementService announcementService, IAuthService authService)
         {
             _announcementRepository = announcementRepository;
@@ -62,7 +54,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             return Ok(new
             {
                 message = ResponseMessage.Success,
-                value = _announcementRepository.Get(id, includes),
+                value = _announcementRepository.Get(id, _announcementService.Includes),
             });
         }
 
@@ -98,7 +90,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             });
         }
 
-        [HttpPost("reactivate/{id}")]
+        [HttpPost("{id}/reactivate")]
         public IActionResult ReactivateAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);

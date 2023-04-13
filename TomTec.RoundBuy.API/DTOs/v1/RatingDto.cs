@@ -18,6 +18,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
         {
             return new Rating()
             {
+                AnnouncementId = this.AnnouncementId,
                 AuthorUserId = authorUserId,
                 CommentText = this.CommentText,
                 Pros = this.Pros,
