@@ -31,8 +31,8 @@ namespace TomTec.RoundBuy.Models
         [Column(TypeName = "datetime")]
         public DateTime BirthDate { get; set; }
 
-        [Column(TypeName = "varchar(max)")]
-        public string ProfilePictureURL { get; set; }
+        public Image Image { get; set; }
+        public int ImageId { get; set; }
 
         public Address Address { get; set; }
 

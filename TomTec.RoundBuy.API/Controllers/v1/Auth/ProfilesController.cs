@@ -25,7 +25,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             _userRepository = userRepository;
         }
 
-
         [HttpPost("")]
         [AllowAnonymous]
         public IActionResult Register([FromBody] UserRegisterDto dto)
@@ -54,7 +53,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
                     nameof(Models.User.UsersClaims),
                     $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
                     nameof(Models.User.Address),
-                    nameof(Models.User.OfficialIdentificationType)
+                    nameof(Models.User.OfficialIdentificationType),
+                    nameof(Models.User.Image)
                 );
             return Ok(new
             {
@@ -71,7 +71,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
                     nameof(Models.User.UsersClaims),
                     $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
                     nameof(Models.User.Address),
-                    nameof(Models.User.OfficialIdentificationType)
+                    nameof(Models.User.OfficialIdentificationType),
+                    nameof(Models.User.Image)
                 ).FirstOrDefault();
 
             return Ok(new
@@ -89,7 +90,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
                     nameof(Models.User.UsersClaims),
                     $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
                     nameof(Models.User.Address),
-                    nameof(Models.User.OfficialIdentificationType)
+                    nameof(Models.User.OfficialIdentificationType),
+                    nameof(Models.User.Image)
                 ).FirstOrDefault();
 
             return Ok(new
@@ -107,7 +109,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
                     nameof(Models.User.UsersClaims),
                     $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
                     nameof(Models.User.Address),
-                    nameof(Models.User.OfficialIdentificationType)
+                    nameof(Models.User.OfficialIdentificationType),
+                    nameof(Models.User.Image)
                 ); 
 
             user.Active = false;
@@ -126,7 +129,8 @@ namespace TomTec.RoundBuy.API.Controllers.v1
                     nameof(Models.User.UsersClaims),
                     $"{nameof(Models.User.UsersClaims)}.{nameof(UsersClaims.Claim)}",
                     nameof(Models.User.Address),
-                    nameof(Models.User.OfficialIdentificationType)
+                    nameof(Models.User.OfficialIdentificationType),
+                    nameof(Models.User.Image)
                 );
 
             user.Active = true;

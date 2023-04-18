@@ -8,7 +8,7 @@ using TomTec.RoundBuy.Models;
 
 namespace TomTec.RoundBuy.Data
 {
-    public static class RepositoryExtensions
+    public static class SQLRepositoryExtensions
     {
         /// <summary>
         /// can be only used with simple 1:1 or 1:N relationships

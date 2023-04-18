@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TomTec.RoundBuy.Data;
 
 namespace TomTec.RoundBuy.API.Migrations
 {
     [DbContext(typeof(RoundBuyDbContext))]
-    partial class RoundBuyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230404012032_SalesTables")]
+    partial class SalesTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,7 @@ namespace TomTec.RoundBuy.API.Migrations
                     b.Property<int>("AdvertiserUserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AlternativeAddressId")
+                    b.Property<int>("AlternativeAddressId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
@@ -223,7 +225,7 @@ namespace TomTec.RoundBuy.API.Migrations
                     b.Property<int>("ParcelsQuantity")
                         .HasColumnType("int");
 
-                    b.Property<double>("ValueWithouDiscount")
+                    b.Property<double>("ValueWithouDiscont")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -237,20 +239,13 @@ namespace TomTec.RoundBuy.API.Migrations
 
             modelBuilder.Entity("TomTec.RoundBuy.Models.OrderProducts", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id", "OrderId", "ProductId");
-
-                    b.HasIndex("OrderId");
+                    b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
 
@@ -559,7 +554,8 @@ namespace TomTec.RoundBuy.API.Migrations
                     b.HasOne("TomTec.RoundBuy.Models.Address", "AlternativeAddress")
                         .WithMany()
                         .HasForeignKey("AlternativeAddressId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TomTec.RoundBuy.Models.Comment", b =>
