@@ -56,7 +56,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             });
         }
 
-        [HttpGet("buyer/{id}")]
+        [HttpGet("buyer/{buyerUserId}")]
         public IActionResult GetOrderByBuyerUserId(int buyerUserId)
         {
             return Ok(new

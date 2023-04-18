@@ -26,7 +26,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                 IsParcelated = this.IsParcelated,
                 ParcelsQuantity = this.ParcelsQuantity,
             };
-            order.OrderProducts = this.ProductsIds.Select(id => new OrderProducts() { ProductId = id, Order = order }).ToList();
+            order.OrderProducts = this.ProductsIds.Select(id => new OrderProducts() { ProductId = id, Order = order}).ToList();
 
             return order;
         }

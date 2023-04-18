@@ -81,7 +81,7 @@ namespace TomTec.RoundBuy.Business
             {
                 try
                 {
-                    _orderProductsRepository.GetByProductId(productPack.ProductId).Select(x => counter++);
+                    _orderProductsRepository.GetByProductId(productPack.ProductId).ToList().ForEach(x => counter++);
                 }
                 catch (KeyNotFoundException)
                 {

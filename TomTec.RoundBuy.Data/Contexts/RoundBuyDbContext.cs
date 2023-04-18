@@ -56,7 +56,7 @@ namespace TomTec.RoundBuy.Data
                 .HasForeignKey(bc => bc.ClaimId);
 
             modelBuilder.Entity<OrderProducts>()
-                .HasKey(op => new { op.OrderId, op.ProductId });
+                .HasKey(op => new { op.Id, op.OrderId, op.ProductId });
             modelBuilder.Entity<OrderProducts>()
                 .HasOne(op => op.Order)
                 .WithMany(o => o.OrderProducts)
