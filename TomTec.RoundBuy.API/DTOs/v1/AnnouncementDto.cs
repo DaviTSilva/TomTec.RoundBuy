@@ -48,7 +48,6 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                     Model = this.MainProduct.Model,
                     Color = this.MainProduct.Color,
                     Price = this.MainProduct.Price,
-                    IsSold = false,
                     TechnicalInfos = mainTechnicalInfos,
                     Images = mainImages,
                     CreationDate = DateTime.UtcNow,
@@ -67,7 +66,6 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                         Model = string.IsNullOrEmpty(x.Model)? this.MainProduct.Model : x.Model,
                         Color = string.IsNullOrEmpty(x.Color)? this.MainProduct.Color : x.Color,
                         Price = x.Price == 0? this.MainProduct.Price : x.Price,
-                        IsSold = false,
                         TechnicalInfos = mainTechnicalInfos,
                         Images = x.Images == null? mainImages : (ICollection<Image>)x.Images.Select(y => new Image()
                         {

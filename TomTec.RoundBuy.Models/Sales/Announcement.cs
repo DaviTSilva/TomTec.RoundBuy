@@ -28,6 +28,7 @@ namespace TomTec.RoundBuy.Models
         public bool IsActive { get; set; } = true;
         public bool IsAvailable { get; set; } = true;
         public bool IsAllSold { get; set; } = false;
+        public double DiscountPorcentage { get; set; }
 
         [NotMapped]
         public int? TotalProducts { get { return this.ProductPacks == null || this.ProductPacks.Count == 0? 0 : this.ProductPacks.Select(x => x.Quantity).Sum(); } }

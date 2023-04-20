@@ -10,8 +10,6 @@ namespace TomTec.RoundBuy.API.DTOs.v1
     {
         public int AnnouncementId { get; set; }
         public IEnumerable<int> ProductsIds { get; set; }
-        public double ValueWithoutDiscount { get; set; }
-        public double DiscountPorcentage { get; set; }
         public bool IsParcelated { get; set; }
         public int ParcelsQuantity { get; set; }
 
@@ -21,8 +19,6 @@ namespace TomTec.RoundBuy.API.DTOs.v1
             {
                 BuyerUserId = buyerUserId,
                 AnnouncementId = this.AnnouncementId,
-                ValueWithouDiscount = this.ValueWithoutDiscount,
-                DiscountPorcentage = this.DiscountPorcentage,
                 IsParcelated = this.IsParcelated,
                 ParcelsQuantity = this.ParcelsQuantity,
             };

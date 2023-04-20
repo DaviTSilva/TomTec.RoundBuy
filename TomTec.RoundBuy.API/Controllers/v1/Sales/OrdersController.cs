@@ -20,20 +20,21 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
     {
         private readonly IRepository<Order> _orderRepository;
         private readonly IAuthService _authService;
-
-        public OrdersController(IRepository<Order> orderRepository, IAuthService authService)
+        private readonly IOrderService _orderService;
+        public OrdersController(IRepository<Order> orderRepository, IAuthService authService, IOrderService orderService)
         {
             _orderRepository = orderRepository;
             _authService = authService;
+            _orderService = orderService;
         }
 
         [HttpPost("")]
         public IActionResult CreateOrder([FromBody] OrderDto orderDto)
         {
             var currentUserId = _authService.GetCurrentUser(User).Id;
-            var order = _orderRepository.Create(orderDto.ToModel(currentUserId));
-
-            return Created(ResponseMessage.Success, order);
+            var order = orderDto.ToModel(currentUserId);
+            _orderService.CalculateValues(order);
+            return Created(ResponseMessage.Success, _orderRepository.Create(order));
         }
 
         [HttpGet("")]
