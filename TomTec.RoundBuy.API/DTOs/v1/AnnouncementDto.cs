@@ -18,6 +18,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
         public string AlternativeAddressCity { get; set; }
         public string AlternativeAddressStateOrProvince { get; set; }
         public string AlternativeAddressCountryName { get; set; }
+        public double DiscountPorcentage { get; set; }
         public MainProductDto MainProduct { get; set; }
         public ICollection<ProductDto> Products { get; set; }
 
@@ -77,16 +78,16 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                     },
                     CreationDate = DateTime.UtcNow,
                 }));
-            }         
+            }
 
             return new Announcement()
             {
                 AdvertiserUserId = userId,
                 Title = this.Title,
                 Description = this.Description,
-                AlternativeAddress = !string.IsNullOrEmpty(this.AlternativeAddressSteet)? 
-                    new Address() 
-                    { 
+                AlternativeAddress = !string.IsNullOrEmpty(this.AlternativeAddressSteet) ?
+                    new Address()
+                    {
                         Street = this.AlternativeAddressSteet,
                         Number = this.AlternativeAddressNumber,
                         AdditionalInformation = this.AlternativeAddressAdditionalInformation,
@@ -98,6 +99,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                     }
                     : null,
                 ProductPacks = productPacks,
+                DiscountPorcentage = this.DiscountPorcentage,
                 IsActive = true,
                 IsAvailable = true,
                 IsAllSold = false,
