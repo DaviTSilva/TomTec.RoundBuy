@@ -1,0 +1,2046 @@
+{
+	"info": {
+		"_postman_id": "f61cb9c9-c58a-4b00-be12-b32dd1e495cf",
+		"name": "RoundBuy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "18659273-f61cb9c9-c58a-4b00-be12-b32dd1e495cf"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"id": "abe66653-970d-40f9-b580-b4966e827b7b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userNameOrEmail\" : \"adminUser1\",\r\n    \"password\" : \"teste@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/auth/login",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logged User",
+					"id": "642f5f48-3a9e-4488-97d5-1c7108c4020a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODIwMzIzNTYsImV4cCI6MTY4MjIwNTE1NiwiaXNzIjoiMTgifQ.87rxoE4cJQWA5ll8flHAEbvgozpGDCeRJjFoPbEINmQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{api-url}}/v1/auth/user",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loggout",
+					"id": "56516806-e714-461c-8847-e61f568d8684",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/auth/loggout",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"loggout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "8803add6-6181-470d-be30-c695ee965933"
+		},
+		{
+			"name": "Profiles",
+			"item": [
+				{
+					"name": "Get Profiles",
+					"id": "2eefdda9-5843-4f88-9d40-d2258cfa3365",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGUyVXNlclRlc3QiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJUZXN0LXVzZXIxIiwibmJmIjoxNjY5NTEyODIzLCJleHAiOjE2Njk2ODU2MjMsImlzcyI6IjEifQ.y2ZsrgM9ILmM-1BizfaSGaoKglewMoKe1g42cHC1HaQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/profiles",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile by Id",
+					"id": "d031e370-db19-4fe9-a394-7c935447a53c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/profiles/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile by Username",
+					"id": "53350db0-fec5-4688-b23f-548da370b862",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/profiles/username/teste3UserTest",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles",
+								"username",
+								"teste3UserTest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile by Email",
+					"id": "dbc458de-ee09-47f6-a1d4-23398f539d7b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/profiles/email/teste3@test.com",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles",
+								"email",
+								"teste3@test.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Profile",
+					"id": "3e678878-3791-4976-9db0-832c0ab58140",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\" : \"adminUser1\",\r\n    \"FirstName\" : \"teste2 Test User\",\r\n    \"LastName\" : \"teste2 Test User\",\r\n    \"Email\" : \"adminUser1@test.com\",\r\n    \"Password\" : \"teste@123\",\r\n    \"BirthDate\" : \"2015-01-01\",\r\n    \"ProfilePictureURL\" : \"https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png\",\r\n    \"OfficialIdentificationTypeId\" : 1,\r\n    \"OfficialIdentitification\" : \"3213123123\",\r\n    \"UserTypeId\" : 1,\r\n    \"ClaimsIds\" : [1, 2],\r\n    \"Street\" : \"Rua teste\",\r\n    \"Number\" : \"0\",\r\n    \"PostalCode\" : \"12993\",\r\n    \"AdditionalInformation\" : \"informacao\",\r\n    \"City\" : \"TesteCity\",\r\n    \"State\" : \"TesteState\",\r\n    \"CountryName\" : \"Testelandia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/profiles",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"id": "33732e97-e6e3-49f9-a803-5bdff6a7a401",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\" : \"teste2UserTest\",\r\n    \"FirstName\" : \"teste2 Test User Updateddd\",\r\n    \"LastName\" : \"teste2 Test User\",\r\n    \"Email\" : \"teste1@test.com\",\r\n    \"BirthDate\" : \"2015-01-01\",\r\n    \"ProfilePictureURL\" : \"https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png\",\r\n    \"UserTypeId\" : 1,\r\n    \"ClaimsIds\" : [1 ,2],\r\n    \"AddressId\" : 1,\r\n    \"OfficialIdentificationTypeId\" : 2,\r\n    \"OfficialIdentification\" : \"9021839028\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/profiles/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile",
+					"id": "7f1181df-bc69-4b0c-86cb-3c5086b5ef63",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGUyVXNlclRlc3QiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJUZXN0LXVzZXIxIiwibmJmIjoxNjY5NDQzOTk3LCJleHAiOjE2Njk2MTY3OTcsImlzcyI6IjEifQ.-G-cu2IM0AIXdheT_45xxQ7CZLRL9Nq1sNQvopXyVAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/profiles/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore deleted User",
+					"id": "2c40e22e-a706-4f25-8fed-a0741059daf2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk0NDM4NDAsImV4cCI6MTY2OTYxNjY0MCwiaXNzIjoiMTQifQ.6kR2pfa3J4Eh3LVF0XIu77_f8q5iUTWeRs_t25fOHlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/profiles/restore/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"profiles",
+								"restore",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "fc3fe249-605f-4d85-b959-1db4fce22123"
+		},
+		{
+			"name": "Addresses",
+			"item": [
+				{
+					"name": "Get Addresses",
+					"id": "74257078-e880-4376-b802-2229623f3435",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODIwMzIzNTYsImV4cCI6MTY4MjIwNTE1NiwiaXNzIjoiMTgifQ.87rxoE4cJQWA5ll8flHAEbvgozpGDCeRJjFoPbEINmQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/addresses",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address by Id",
+					"id": "ba6d29e3-4797-40a4-bb79-94a5257973fc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODIwMzIzNTYsImV4cCI6MTY4MjIwNTE1NiwiaXNzIjoiMTgifQ.87rxoE4cJQWA5ll8flHAEbvgozpGDCeRJjFoPbEINmQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/addresses/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "3f753d77-697c-4c33-a0c0-de4b83f43ede",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdGUyVXNlclRlc3QiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJUZXN0LXVzZXIxIiwibmJmIjoxNjY5NTEyODIzLCJleHAiOjE2Njk2ODU2MjMsImlzcyI6IjEifQ.y2ZsrgM9ILmM-1BizfaSGaoKglewMoKe1g42cHC1HaQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Rua teste 1\",\r\n    \"number\": \"0\",\r\n    \"additionalInformation\": \"informacao\",\r\n    \"postalCode\": \"12993\",\r\n    \"city\": \"TesteCity\",\r\n    \"stateOrProvince\": null,\r\n    \"countryName\": \"Testelandia\",\r\n    \"id\": 1,\r\n    \"creationDate\": \"2022-11-21T20:24:37.943\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/addresses/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "a0853f26-97ef-43ae-ba32-426944c2120c"
+		},
+		{
+			"name": "Claims",
+			"item": [
+				{
+					"name": "Get Claims",
+					"id": "556c25e6-3435-475c-b206-d17349fd3545",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/claims",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Claim by Id",
+					"id": "03945dca-e0dc-408e-9d85-dede1bfe7f2b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/claims/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Claim",
+					"id": "ff9955b5-e8f3-41e4-9de7-e1f8cb2f36ab",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/claims",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Claim",
+					"id": "d9bcc380-3a4b-4a90-92d6-381b1f90b19b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"test3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/claims/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Claim",
+					"id": "8263f3b4-8f3a-4eb6-9993-96ba2e6586d3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/claims/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign User to Claim",
+					"id": "d9c7e4f8-59f3-45a3-8311-d817c527cd12",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"claimId\" : \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/claims/sign",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims",
+								"sign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unsign User to Claim",
+					"id": "039863dd-da9e-4b5d-ad85-79eeb97cc1cb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"claimId\" : \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/claims/unsign",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"claims",
+								"unsign"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "2f1537b7-9efc-40ab-9340-b12799278339"
+		},
+		{
+			"name": "Official Identification Types",
+			"item": [
+				{
+					"name": "Get Official Indentification Type",
+					"id": "8325f2e0-6cb2-4fd6-9840-a3e3cff73743",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/official-identification-types",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"official-identification-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OIT by Id",
+					"id": "b8bfd9fe-76b3-437f-a597-b243ba25f5c0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/official-identification-types/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"official-identification-types",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New OIT",
+					"id": "a0939b04-ee86-419a-b179-0ac48daab754",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/official-identification-types",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"official-identification-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update OIT",
+					"id": "4c3ea8c2-425a-40cf-8376-26ba23db5557",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"test22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/official-identification-types/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"official-identification-types",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete OIT",
+					"id": "626aae84-3774-4a79-858d-b81f02607c35",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/official-identification-types/3",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"official-identification-types",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "fd82da0f-eed0-4ce9-8161-5e3b537e93b0"
+		},
+		{
+			"name": "User Types",
+			"item": [
+				{
+					"name": "Get User Types",
+					"id": "ac5120e8-0fbb-4449-b56a-3ed63638ff48",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/user-types",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"user-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Types by Id",
+					"id": "bc2aea53-65a2-48a7-887f-e9aa61681ef5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/user-types/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"user-types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New User Type",
+					"id": "46325adb-86c0-4965-a9da-2bb14908b009",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/user-types",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"user-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Type",
+					"id": "0c5f1a7e-646e-4b86-92d6-2d2c27fcdf88",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"test3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/user-types/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"user-types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Type",
+					"id": "e99f57e7-9ed3-4901-aad3-1844eb6465ae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MTQzMjMsImV4cCI6MTY2OTY4NzEyMywiaXNzIjoiMTQifQ.sZGJ4nzWT3CeeRvBjM1k1BpNSqNq-Ph_cR-dLYqMO-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/user-types/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"user-types",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "95d21d0a-fa5f-4696-ba62-69a731353900"
+		},
+		{
+			"name": "Payment Methods",
+			"item": [
+				{
+					"name": "Get Payments Methods",
+					"id": "fad78d5c-0295-4d46-9e55-9b40d91738d0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/payment-methods",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"payment-methods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Payment Method",
+					"id": "a1bd99db-6a1b-484d-91ac-d6daad61a57d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODA2NDkxMzgsImV4cCI6MTY4MDgyMTkzOCwiaXNzIjoiMTgifQ.LOj4ItU-8bTJicY3heyb-gdjo23KkzrgCJzwdkPYgHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"boleto bancario\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/payment-methods",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"payment-methods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment Method By Id",
+					"id": "5fbdbadd-601d-4dd7-8521-02169f2ec3bc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/payment-methods/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"payment-methods",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payment Method",
+					"id": "7b5816a8-8707-4033-b351-6b0b26f628f8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODA2NDkxMzgsImV4cCI6MTY4MDgyMTkzOCwiaXNzIjoiMTgifQ.LOj4ItU-8bTJicY3heyb-gdjo23KkzrgCJzwdkPYgHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Credit Card\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/payment-methods/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"payment-methods",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "fcf10953-0442-4412-a2e6-583c8c47cd13",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODA2NDkxMzgsImV4cCI6MTY4MDgyMTkzOCwiaXNzIjoiMTgifQ.LOj4ItU-8bTJicY3heyb-gdjo23KkzrgCJzwdkPYgHk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/payment-methods/3",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"payment-methods",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "8b279104-edc8-4fb3-b399-e0ee03b037ea"
+		},
+		{
+			"name": "Announcement",
+			"item": [
+				{
+					"name": "New Announcement",
+					"id": "26f778ae-56d5-4711-a100-58e66e09fbda",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzNDk5MzUsImV4cCI6MTY4MTUyMjczNSwiaXNzIjoiMTgifQ.aqLWklu-9tVMLm3W9v13uwtvGVTsT5At8UszFzdKBdU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"Um mochila bem bonita\",\r\n    \"description\" : \"Um mochila linda, com acabamento em couro ideal para usar na escola ou faculdade com compartimentos para canetas e notenook\",\r\n    \"minimalSaleQuantity\" : 120,\r\n    \"mainProduct\" : {\r\n        \"quantity\" : 60,\r\n        \"title\" : \"Um mochila bem bonita branca\",\r\n        \"model\" : \"grande\",\r\n        \"color\" : \"branco\",\r\n        \"price\" : 140.50,\r\n        \"technicalInfos\" : [\r\n            {\r\n                \"title\" : \"Conteudo\",\r\n                \"infoSeparetedBySemicolon\" : \"uma caixa;uma mochila; protetores; cabo do conector USB para ceuluar\"\r\n            },\r\n            {\r\n                \"title\" : \"Dimensões\",\r\n                \"infoSeparetedBySemicolon\" : \"70cm de altura;30cm de largura;120 gramas de peso\"\r\n            }\r\n        ],\r\n        \"images\" : [\r\n            {\r\n                \"altText\" : \"Mochila Branca nas costas de uma garota\",\r\n                \"Url\" : \"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSJMHXuH8joFKbZtpz5lid5hX3xq6zAsJJHdUHHeV4XTpcd9yKnU013M0pCtzcQYDya0cS3KYEPrsU5AXeJjpvCY-MIAd_U&usqp=CAY\"\r\n            },\r\n            {\r\n                \"altText\" : \"Mochila Branca tamanho\",\r\n                \"Url\" : \"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSXwjMsLWoPlTCqxnbacuuiSvAAMeMT25M8-ijj5bihBUkhsjYc2mkMgIXSo289GRDV7gkIbbrs8x9bcI0bPbf1ZtyPiWR1&usqp=CAY\"\r\n            }\r\n        ]\r\n    },\r\n    \"Products\" : [\r\n        {\r\n            \"title\" : \"Um mochila bem bonita preta\",\r\n            \"color\" : \"Preto\",\r\n            \"quantity\" : 40\r\n        },\r\n         {\r\n            \"title\" : \"Um mochila bem bonita rosa\",\r\n            \"color\" : \"Rosa\",\r\n            \"quantity\" : 20\r\n        }\r\n    ],\r\n    \"alternativeAddressSteet\" : \"Rua dos bobos\",\r\n    \"alternativeAddressNumber\" : \"0\",\r\n    \"alternativeAddressAdditionalInformation\" : \"\",\r\n    \"alternativeAddressPostalCode\" : \"3431-009\",\r\n    \"alternativeAddressCity\" : \"São Paulo\",\r\n    \"alternativeAddressStateOrProvince\" : \"SP\",\r\n    \"alternativeAddressCountryName\" : \"Brasil\",\r\n    \"discountPorcentage\" : 0.10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/announcements",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Announcement Without Address",
+					"id": "963a590c-f185-4694-be89-ca2707fbc475",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzNDk5MzUsImV4cCI6MTY4MTUyMjczNSwiaXNzIjoiMTgifQ.aqLWklu-9tVMLm3W9v13uwtvGVTsT5At8UszFzdKBdU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"Um mochila bem bonita\",\r\n    \"description\" : \"Um mochila linda, com acabamento em couro ideal para usar na escola ou faculdade com compartimentos para canetas e notenook\",\r\n    \"minimalSaleQuantity\" : 120,\r\n    \"mainProduct\" : {\r\n        \"quantity\" : 60,\r\n        \"title\" : \"Um mochila bem bonita branca\",\r\n        \"model\" : \"grande\",\r\n        \"color\" : \"branco\",\r\n        \"price\" : 140.50,\r\n        \"technicalInfos\" : [\r\n            {\r\n                \"title\" : \"Conteudo\",\r\n                \"infoSeparetedBySemicolon\" : \"uma caixa;uma mochila; protetores; cabo do conector USB para ceuluar\"\r\n            },\r\n            {\r\n                \"title\" : \"Dimensões\",\r\n                \"infoSeparetedBySemicolon\" : \"70cm de altura;30cm de largura;120 gramas de peso\"\r\n            }\r\n        ],\r\n        \"images\" : [\r\n            {\r\n                \"altText\" : \"Mochila Branca nas costas de uma garota\",\r\n                \"Url\" : \"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSJMHXuH8joFKbZtpz5lid5hX3xq6zAsJJHdUHHeV4XTpcd9yKnU013M0pCtzcQYDya0cS3KYEPrsU5AXeJjpvCY-MIAd_U&usqp=CAY\"\r\n            },\r\n            {\r\n                \"altText\" : \"Mochila Branca tamanho\",\r\n                \"Url\" : \"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSXwjMsLWoPlTCqxnbacuuiSvAAMeMT25M8-ijj5bihBUkhsjYc2mkMgIXSo289GRDV7gkIbbrs8x9bcI0bPbf1ZtyPiWR1&usqp=CAY\"\r\n            }\r\n        ]\r\n    },\r\n    \"Products\" : [\r\n        {\r\n            \"title\" : \"Um mochila bem bonita preta\",\r\n            \"color\" : \"Preto\",\r\n            \"quantity\" : 40\r\n        },\r\n         {\r\n            \"title\" : \"Um mochila bem bonita rosa\",\r\n            \"color\" : \"Rosa\",\r\n            \"quantity\" : 20\r\n        }\r\n    ],\r\n    \"discountPorcentage\" : 0.10\r\n    // ],\r\n    // \"alternativeAddressSteet\" : \"Rua dos bobos\",\r\n    // \"alternativeAddressNumber\" : \"0\",\r\n    // \"alternativeAddressAdditionalInformation\" : \"\",\r\n    // \"alternativeAddressPostalCode\" : \"3431-009\",\r\n    // \"alternativeAddressCity\" : \"São Paulo\",\r\n    // \"alternativeAddressStateOrProvince\" : \"SP\",\r\n    // \"alternativeAddressCountryName\" : \"Brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/announcements",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Announcements",
+					"id": "2b739278-2858-42ad-8cbe-cf93bced40ad",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/announcements",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtred Annoucements",
+					"id": "a6c49eaa-d869-4e7a-9919-5ea46d249c22",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/announcements?searchString=mochila&minimalPrice=10&maximumPrice=130",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements"
+							],
+							"query": [
+								{
+									"key": "searchString",
+									"value": "mochila"
+								},
+								{
+									"key": "minimalPrice",
+									"value": "10"
+								},
+								{
+									"key": "maximumPrice",
+									"value": "130"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Announcement By ID",
+					"id": "8afc36fc-2962-4c0b-a5ca-4ce3d0b39b48",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/announcements/7",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sold Products Counter",
+					"id": "b625e0f9-012e-4bc8-b8db-6cc42b37304e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/announcements/7/sold-products-counter",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements",
+								"7",
+								"sold-products-counter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Announcement",
+					"id": "673030f2-a4d8-4161-b951-4db304720834",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"Um mochila bem bonita 2\",\r\n    \"description\" : \"Um mochila linda, com acabamento em couro ideal para usar na escola ou faculdade com compartimentos para canetas e notenook\",\r\n    \"minimalSaleQuantity\" : 120,\r\n    \"mainProduct\" : {\r\n        \"quantity\" : 60,\r\n        \"title\" : \"Um mochila bem bonita branca\",\r\n        \"model\" : \"grande\",\r\n        \"color\" : \"branco\",\r\n        \"price\" : 140.50,\r\n        \"technicalInfos\" : [\r\n            {\r\n                \"title\" : \"Conteudo\",\r\n                \"infoSeparetedBySemicolon\" : \"uma caixa;uma mochila; protetores; cabo do conector USB para ceuluar\"\r\n            },\r\n            {\r\n                \"title\" : \"Dimensões\",\r\n                \"infoSeparetedBySemicolon\" : \"70cm de altura;30cm de largura;120 gramas de peso\"\r\n            }\r\n        ],\r\n        \"images\" : [\r\n            {\r\n                \"altText\" : \"Mochila Branca nas costas de uma garota\",\r\n                \"Url\" : \"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSJMHXuH8joFKbZtpz5lid5hX3xq6zAsJJHdUHHeV4XTpcd9yKnU013M0pCtzcQYDya0cS3KYEPrsU5AXeJjpvCY-MIAd_U&usqp=CAY\"\r\n            },\r\n            {\r\n                \"altText\" : \"Mochila Branca tamanho\",\r\n                \"Url\" : \"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSXwjMsLWoPlTCqxnbacuuiSvAAMeMT25M8-ijj5bihBUkhsjYc2mkMgIXSo289GRDV7gkIbbrs8x9bcI0bPbf1ZtyPiWR1&usqp=CAY\"\r\n            }\r\n        ]\r\n    },\r\n    \"Products\" : [\r\n        {\r\n            \"title\" : \"Um mochila bem bonita preta\",\r\n            \"color\" : \"Preto\",\r\n            \"quantity\" : 40\r\n        },\r\n         {\r\n            \"title\" : \"Um mochila bem bonita rosa\",\r\n            \"color\" : \"Rosa\",\r\n            \"quantity\" : 20\r\n        }\r\n    ],\r\n    \"alternativeAddressSteet\" : \"Rua dos bobos\",\r\n    \"alternativeAddressNumber\" : \"0\",\r\n    \"alternativeAddressAdditionalInformation\" : \"\",\r\n    \"alternativeAddressPostalCode\" : \"3431-009\",\r\n    \"alternativeAddressCity\" : \"São Paulo\",\r\n    \"alternativeAddressStateOrProvince\" : \"SP\",\r\n    \"alternativeAddressCountryName\" : \"Brasil\",\r\n    \"discountPorcentage\" : 0.10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/announcements/7",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Desativate Announcement",
+					"id": "ac3eebc6-1c0d-4b71-b5d7-4a980c42db6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/announcements/7",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reactivate Announcement",
+					"id": "940a9c55-3d29-4490-9049-be00e8b191c9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/announcements/7/reactivate",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"announcements",
+								"7",
+								"reactivate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "6e8f69a8-d805-4deb-a159-8eb0de72f999"
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "New Comment",
+					"id": "7ddc0f6b-ec2f-4b02-b073-51eaf987efdc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentText\" : \"Tem alcas para apio?\",\r\n    \"announcementId\" : 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/comments",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment by id",
+					"id": "a8a8b96b-a255-490a-afa5-c6cc714b9b50",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/comments/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comments by Announcement",
+					"id": "e5769e3e-8f5a-4aac-b420-0108724c61e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/comments/announcement/7",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"announcement",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"id": "2ba705f3-798a-4f18-95b5-58145d131460",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentText\" : \"nao gostei das cores, tem outras?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/comments/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"id": "e2c2ac8b-b636-4713-830a-3147258ce44c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/comments/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "56a06199-707a-47cd-9d56-cdb99b83ed45"
+		},
+		{
+			"name": "Ratings",
+			"item": [
+				{
+					"name": "New Rating",
+					"id": "0d8a77ce-ffae-4058-99de-23053dff52e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"announcementId\" : 7,\r\n    \"commentText\" : \"vale a pena\",\r\n    \"pros\" : \"material de qualidade que vai durar bastante tempo\",\r\n    \"cons\" : \"preco muito acima do mercado\",\r\n    \"rate\" : 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/ratings",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rating By ID",
+					"id": "c5ce0b7a-81aa-48f6-b69c-78b88c86669e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/ratings/3",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"ratings",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rating by Announcement",
+					"id": "59a9df35-1827-4213-895a-f09db6c9cbd4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/ratings/announcement/7",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"ratings",
+								"announcement",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Rating",
+					"id": "37292249-221b-4b41-aa84-0709d0e4ff6f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentText\" : \"muito show\",\r\n    \"Pros\" : \"tudo\",\r\n    \"cons\" : \"nada\",\r\n    \"rate\" : 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/ratings/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"ratings",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Rating",
+					"id": "d49e17cd-84b7-4893-a714-3ac47af3da28",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODEzOTc4MjYsImV4cCI6MTY4MTU3MDYyNiwiaXNzIjoiMTgifQ.G_P7XfPRHGPg2H-dl8uNFv9UcYzRyplzrDA3ZxW6sLg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/ratings/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"ratings",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7a091f14-682a-4082-8268-1640342dd8c9"
+		},
+		{
+			"name": "Oders",
+			"item": [
+				{
+					"name": "New Order",
+					"id": "0ee1593d-e4d1-4e12-b91c-b1590246753f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2ODIwMzIzNTYsImV4cCI6MTY4MjIwNTE1NiwiaXNzIjoiMTgifQ.87rxoE4cJQWA5ll8flHAEbvgozpGDCeRJjFoPbEINmQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"announcementId\" : 7,\r\n    \"productsIds\" : [19, 19, 20],\r\n    \"isParcelated\" : true,\r\n    \"parcelsQuantity\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/v1/orders",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders",
+					"id": "8b3f6bb3-66d2-43e2-91e9-c0e51b82ffd5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/orders",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders by ID",
+					"id": "690cf5e8-68dc-4ecc-b402-a7767a14f6fa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/orders/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders bu User",
+					"id": "8806e7d3-3760-4135-b0d4-de11138ef2b8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/v1/orders/buyer/18",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"v1",
+								"orders",
+								"buyer",
+								"18"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "9ce65161-1cca-4324-8656-1106d0f4cc69"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5Vc2VyMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJUZXN0LXVzZXIxIiwibWFuYWdlciJdLCJuYmYiOjE2Njk1MzM3MDAsImV4cCI6MTY2OTcwNjUwMCwiaXNzIjoiMTQifQ.g8fGwQ4bHCOvxeij1-XWvRaknsx0SGyIW-BcaAzDKqo",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "86f92c51-e56e-410b-8fd0-d32fa19b9104",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "82cbfe2a-4c03-4966-91eb-0757b14f1737",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
