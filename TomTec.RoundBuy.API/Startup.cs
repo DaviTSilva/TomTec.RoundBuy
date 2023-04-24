@@ -101,6 +101,8 @@ namespace TomTec.RoundBuy.API
             {
                 endpoints.MapControllers();
             });
+
+            app.MigrationInitialization();
         }
     }
 }
