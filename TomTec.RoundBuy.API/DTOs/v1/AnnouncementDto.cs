@@ -21,6 +21,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
         public double DiscountPorcentage { get; set; }
         public MainProductDto MainProduct { get; set; }
         public ICollection<ProductDto> Products { get; set; }
+        public int CategoryId { get; set; }
 
         public Announcement ToModel(int userId)
         {
@@ -100,6 +101,7 @@ namespace TomTec.RoundBuy.API.DTOs.v1
                     : null,
                 ProductPacks = productPacks,
                 DiscountPorcentage = this.DiscountPorcentage,
+                CategoryId = this.CategoryId,
                 IsActive = true,
                 IsAvailable = true,
                 IsAllSold = false,

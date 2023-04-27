@@ -120,6 +120,7 @@ namespace TomTec.RoundBuy.Data
         public DbSet<ProductPack> ProductPacks { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Category> Categories { get; set; }
         #endregion
     }
 }
