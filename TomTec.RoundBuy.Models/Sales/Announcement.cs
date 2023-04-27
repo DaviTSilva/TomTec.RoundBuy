@@ -20,6 +20,8 @@ namespace TomTec.RoundBuy.Models
 
         [Column(TypeName = "varchar(max)")]
         public string Description { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
         public ICollection<ProductPack> ProductPacks { get; set; }
         public ICollection<Comment> Comments { get; set; }

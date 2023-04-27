@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         }
 
         [HttpPost("")]
+        [Authorize]
         public IActionResult CreateAnnouncement([FromBody] AnnouncementDto announcementDto)
         {
             var announcement = _announcementRepository.Create(announcementDto.ToModel(_authService.GetCurrentUser(User).Id));
@@ -59,6 +61,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult UpdateAnnouncemnt(int id, [FromBody] AnnouncementDto announcementDto)
         {
             if(_announcementRepository.Get(id).AdvertiserUserId != _authService.GetCurrentUser(User).Id)
@@ -75,6 +78,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult DeleteAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);
@@ -91,6 +95,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         }
 
         [HttpPost("{id}/reactivate")]
+        [Authorize]
         public IActionResult ReactivateAnnouncemnt(int id)
         {
             var announcement = _announcementRepository.Get(id);
