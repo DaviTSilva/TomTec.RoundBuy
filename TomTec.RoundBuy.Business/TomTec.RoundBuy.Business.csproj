@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TomTec.RoundBuy.Models\TomTec.RoundBuy.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validations\_interfaces\" />
+  </ItemGroup>
+
 </Project>
