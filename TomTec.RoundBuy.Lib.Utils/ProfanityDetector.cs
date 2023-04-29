@@ -493,9 +493,12 @@ namespace TomTec.RoundBuy.Lib.Utils
         }
 
 		static public string CensorPranity(this string source)
-        {
+		{
 			var strb = new StringBuilder(source);
-			BadWords.ToList().ForEach(x => strb.Replace(x, "****"));
+			foreach (var badword in BadWords)
+            {
+				strb.Replace(badword, "****");
+			}
 
 			return strb.ToString();
         }
