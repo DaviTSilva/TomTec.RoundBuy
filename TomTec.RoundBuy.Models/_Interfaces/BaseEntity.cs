@@ -9,7 +9,7 @@ namespace TomTec.RoundBuy.Models
     public abstract class BaseEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         [Column(TypeName = "datetime")]
         public DateTime CreationDate { get; set; }
