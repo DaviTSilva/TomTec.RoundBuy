@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TomTec.RoundBuy.Models;
 
@@ -30,6 +31,7 @@ namespace TomTec.RoundBuy.Data
             SetUpUniqueValues(modelBuilder);
             SetUpManyToManyRelationships(modelBuilder);
             SetUpOnDeleteMethod(modelBuilder);
+            SetUpInitialValues(modelBuilder);
         }
 
         #region SetUp Methods
@@ -40,6 +42,7 @@ namespace TomTec.RoundBuy.Data
             modelBuilder.Entity<Claim>().HasIndex(r => r.Name).IsUnique();
             modelBuilder.Entity<UserType>().HasIndex(ut => ut.Name).IsUnique();
             modelBuilder.Entity<PaymentMethod>().HasIndex(ut => ut.Name).IsUnique();
+            modelBuilder.Entity<OfficialIdentificationType>().HasIndex(oi => oi.Name).IsUnique();
         }
 
         private static void SetUpManyToManyRelationships(ModelBuilder modelBuilder)
@@ -98,6 +101,45 @@ namespace TomTec.RoundBuy.Data
                 .WithMany()
                 .HasForeignKey(r2 => r2.AuthorUserId)
                 .OnDelete(DeleteBehavior.NoAction);
+        }
+
+        private static void SetUpInitialValues(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+            .Entity<OfficialIdentificationType>()
+            .HasData(Enum.GetValues(typeof(OffcialIdentificationTypeEnum))
+                .Cast<OffcialIdentificationTypeEnum>()
+                .Select(e => new OfficialIdentificationType
+                {
+                    Id = (short)e,
+                    Name = e.ToString(),
+                    CreationDate = DateTime.UtcNow,
+                })
+            );
+
+            modelBuilder
+            .Entity<UserType>()
+            .HasData(Enum.GetValues(typeof(UserTypeEnum))
+                .Cast<UserTypeEnum>()
+                .Select(e => new UserType
+                {
+                    Id = (short)e,
+                    Name = e.ToString(),
+                    CreationDate = DateTime.UtcNow,
+                })
+            );
+
+            modelBuilder
+            .Entity<PaymentMethod>()
+            .HasData(Enum.GetValues(typeof(PaymentMethodEnum))
+                .Cast<PaymentMethodEnum>()
+                .Select(e => new PaymentMethod
+                {
+                    Id = (short)e,
+                    Name = e.ToString(),
+                    CreationDate = DateTime.UtcNow,
+                })
+            );
         }
         #endregion
 
