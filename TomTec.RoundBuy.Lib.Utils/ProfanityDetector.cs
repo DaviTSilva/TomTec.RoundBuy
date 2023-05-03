@@ -2109,7 +2109,7 @@ namespace TomTec.RoundBuy.Lib.Utils
 			return BadWords.Any(x => source.Contains(x));
         }
 
-		static public string CensorPranity(this string source)
+		static public string CensorProfanity(this string source)
 		{
 			var strb = new StringBuilder(source);
 			foreach (var badword in BadWords)
