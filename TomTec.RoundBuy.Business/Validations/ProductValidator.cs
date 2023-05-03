@@ -12,19 +12,19 @@ namespace TomTec.RoundBuy.Business
         static public void Validate(this Product product)
         {
             if (product.Title.ContainsProfanity())
-                throw new InvalidOperationException($"[INVALID \"{nameof(Product).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Title).ToUpper()}\"]: The product title can not contain profane words!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Product)}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Title)}\"]: The product title can not contain profane words!");
             
             if (product.Color.ContainsProfanity())
-                throw new InvalidOperationException($"[INVALID \"{nameof(Product).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Color).ToUpper()}\"]: The product color name can not contain profane words!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Product)}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Color)}\"]: The product color name can not contain profane words!");
 
             if (product.Model.ContainsProfanity())
-                throw new InvalidOperationException($"[INVALID \"{nameof(Product).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Model).ToUpper()}\"]: The product model can not contain profane words!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Product)}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Model)}\"]: The product model can not contain profane words!");
 
             if (product.TechnicalInfos.Any(x => x.InfoSeparetedBySemicolon.ContainsProfanity()))
-                throw new InvalidOperationException($"[INVALID \"{nameof(Product).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Product.TechnicalInfos).ToUpper()}\"]: The product technical info can not contain profane words!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Product)}\"! WRONG VALUE FOR FIELD \"{nameof(Product.TechnicalInfos)}\"]: The product technical info can not contain profane words!");
 
             if(string.IsNullOrEmpty(product.Title))
-                throw new InvalidOperationException($"[INVALID \"{nameof(Product).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Title).ToUpper()}\"]: The product title can not be empty!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Product)}\"! WRONG VALUE FOR FIELD \"{nameof(Product.Title)}\"]: The product title can not be empty!");
         }
     }
 }

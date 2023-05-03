@@ -67,6 +67,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         {
             var rating = _ratingRepository.Get(id);
             ratingDto.UpdateModel(rating);
+            rating.Validate();
 
             if (rating.AuthorUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();

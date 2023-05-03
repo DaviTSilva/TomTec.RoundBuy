@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TomTec.RoundBuy.API.DTOs.v1;
 using TomTec.RoundBuy.API.Records.v1;
+using TomTec.RoundBuy.Business.Validations;
 using TomTec.RoundBuy.Data;
 using TomTec.RoundBuy.Lib.AspNetCore;
 using TomTec.RoundBuy.Lib.AspNetCore.Filters;
@@ -29,8 +30,10 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [AllowAnonymous]
         public IActionResult Register([FromBody] UserRegisterDto dto)
         {
-            var user = _userRepository.Create(dto.ToModel());
-            return Created(ResponseMessage.Success, new UserRegisterRecord(user));
+            var user = dto.ToModel();
+            user.Validate();
+            var createdUser = _userRepository.Create(dto.ToModel());
+            return Created(ResponseMessage.Success, new UserRegisterRecord(createdUser));
         }
 
         [HttpGet("")]
@@ -148,6 +151,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             User user = dto.ToModel();
             user.Id = id;
 
+            user.Validate();
             var initialUser = _userRepository.Get(id, nameof(Models.User.UsersClaims));
             user.Password = initialUser.Password;
             user.PasswordSalt = initialUser.PasswordSalt;

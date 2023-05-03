@@ -62,6 +62,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         {
             var comment = _commentRepository.Get(id);
             comment.CommentText = commentDto.CommentText;
+            comment.Validate();
 
             if (comment.AuthorUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();

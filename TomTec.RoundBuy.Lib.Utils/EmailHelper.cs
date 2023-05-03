@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TomTec.RoundBuy.Lib.Utils
 {
-    public class EmailHelper
+    public static class EmailHelper
     {
-        public static bool IsValidEmail(string email)
+        public static bool IsEmail(this string email)
         {
             try
             {

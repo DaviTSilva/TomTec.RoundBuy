@@ -11,10 +11,10 @@ namespace TomTec.RoundBuy.Business
         static public void Validate(this Comment comment)
         {
             if (string.IsNullOrEmpty(comment.CommentText))
-                throw new InvalidOperationException($"[INVALID \"{nameof(Comment).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Comment.CommentText).ToUpper()}\"]: Comments can not be empty!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Comment)}\"! WRONG VALUE FOR FIELD \"{nameof(Comment.CommentText)}\"]: Comments can not be empty!");
             
             if (comment.CommentText.ContainsProfanity())
-                throw new InvalidOperationException($"[INVALID \"{nameof(Comment).ToUpper()}\"! WRONG VALUE FOR FIELD \"{nameof(Comment.CommentText).ToUpper()}\"]: Comments can not contain profane words!");
+                throw new InvalidOperationException($"[INVALID \"{nameof(Comment)}\"! WRONG VALUE FOR FIELD \"{nameof(Comment.CommentText)}\"]: Comments can not contain profane words!");
         }
     }
 }

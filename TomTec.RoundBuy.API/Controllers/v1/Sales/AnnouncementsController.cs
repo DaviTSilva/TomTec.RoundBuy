@@ -72,6 +72,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
 
             var announcement = announcementDto.ToModel(_authService.GetCurrentUser(User).Id);
             announcement.Id = id;
+            announcement.Validate();
             _announcementRepository.Update(announcement);
 
             return Ok(new 
