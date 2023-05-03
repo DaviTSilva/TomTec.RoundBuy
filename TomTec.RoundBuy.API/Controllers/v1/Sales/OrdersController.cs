@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TomTec.RoundBuy.API.DTOs.v1;
 using TomTec.RoundBuy.Business;
+using TomTec.RoundBuy.Business.Validations;
 using TomTec.RoundBuy.Data;
 using TomTec.RoundBuy.Lib.AspNetCore;
 using TomTec.RoundBuy.Lib.AspNetCore.Filters;
@@ -34,7 +35,9 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             var currentUserId = _authService.GetCurrentUser(User).Id;
             var order = orderDto.ToModel(currentUserId);
             _orderService.CalculateValues(order);
-            return Created(ResponseMessage.Success, _orderRepository.Create(order));
+            order.Validate();
+            var createdOrder = _orderRepository.Create(order);
+            return Created(ResponseMessage.Success, createdOrder);
         }
 
         [HttpGet("")]
