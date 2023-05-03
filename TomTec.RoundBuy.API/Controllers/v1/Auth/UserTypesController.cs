@@ -25,14 +25,14 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             _userTypeRepository = userTypeRepository;
         }
 
-        [HttpPost("")]
-        [Authorize(Roles = "manager")]
-        public IActionResult CreateUserType([FromBody] UserTypeDto dto)
-        {
-            var userType = _userTypeRepository.Create(dto.ToModel());
+        //[HttpPost("")]
+        //[Authorize(Roles = "manager")]
+        //public IActionResult CreateUserType([FromBody] UserTypeDto dto)
+        //{
+        //    var userType = _userTypeRepository.Create(dto.ToModel());
 
-            return Created(ResponseMessage.Success, userType);
-        }
+        //    return Created(ResponseMessage.Success, userType);
+        //}
 
         [HttpGet("")]
         [AllowAnonymous]
@@ -73,16 +73,16 @@ namespace TomTec.RoundBuy.API.Controllers.v1
             });
         }
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "manager")]
-        public IActionResult DeleteUserType(int id)
-        {
-            _userTypeRepository.Delete(id);
+        //[HttpDelete("{id}")]
+        //[Authorize(Roles = "manager")]
+        //public IActionResult DeleteUserType(int id)
+        //{
+        //    _userTypeRepository.Delete(id);
 
-            return Ok(new
-            {
-                message = ResponseMessage.Success
-            });
-        }
+        //    return Ok(new
+        //    {
+        //        message = ResponseMessage.Success
+        //    });
+        //}
     }
 }
