@@ -21,21 +21,25 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
     {
         private readonly IAuthService _authService;
         private readonly IRepository<Rating> _ratingRepository;
-        public RatingsController(IAuthService authService, IRepository<Rating> ratingRepository)
+        private readonly IRatingService _ratingService;
+
+        public RatingsController(IAuthService authService, IRepository<Rating> ratingRepository, IRatingService ratingService)
         {
             _authService = authService;
             _ratingRepository = ratingRepository;
+            _ratingService = ratingService;
         }
 
         [HttpPost("")]
         public IActionResult CreateRating([FromBody] RatingDto ratingDto)
         {
-            int authorUserId = _authService.GetCurrentUser(User).Id;
-            var rating = ratingDto.ToModel(authorUserId);
-            CorretRating(rating);
-            _ratingRepository.Create(rating);
+            var userId = _authService.GetCurrentUser(User).Id;
+            _ratingService.CheckIfUserCanRate(userId, ratingDto.AnnouncementId);
+            var rating = ratingDto.ToModel(userId);
+            rating.Validate();
+            var createdRating = _ratingRepository.Create(rating);
 
-            return Created(ResponseMessage.Success, rating);
+            return Created(ResponseMessage.Success, createdRating);
         }
 
         [HttpGet("{id}")]
@@ -63,6 +67,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
         {
             var rating = _ratingRepository.Get(id);
             ratingDto.UpdateModel(rating);
+            rating.Validate();
 
             if (rating.AuthorUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();
@@ -85,15 +90,6 @@ namespace TomTec.RoundBuy.API.Controllers.v1.Sales
             {
                 message = ResponseMessage.Success
             });
-        }
-
-        private void CorretRating(Rating rating)
-        {
-            rating.Rate = rating.Rate > 5
-                ? 5
-                : rating.Rate < 0
-                    ? 0
-                    : rating.Rate;
         }
     }
 }

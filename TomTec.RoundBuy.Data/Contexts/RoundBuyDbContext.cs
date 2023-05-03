@@ -107,8 +107,8 @@ namespace TomTec.RoundBuy.Data
         {
             modelBuilder
             .Entity<OfficialIdentificationType>()
-            .HasData(Enum.GetValues(typeof(OffcialIdentificationTypeEnum))
-                .Cast<OffcialIdentificationTypeEnum>()
+            .HasData(Enum.GetValues(typeof(OfficialIdentificationTypeEnum))
+                .Cast<OfficialIdentificationTypeEnum>()
                 .Select(e => new OfficialIdentificationType
                 {
                     Id = (short)e,

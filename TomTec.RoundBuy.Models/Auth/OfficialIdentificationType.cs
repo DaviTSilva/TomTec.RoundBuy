@@ -16,7 +16,7 @@ namespace TomTec.RoundBuy.Models
         public string Name { get; set; }
     }
 
-    public enum OffcialIdentificationTypeEnum 
+    public enum OfficialIdentificationTypeEnum
     {
         CPF = 1,
         CPNJ = 2,

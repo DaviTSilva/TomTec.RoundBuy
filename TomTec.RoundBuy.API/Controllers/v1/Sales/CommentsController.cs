@@ -30,10 +30,11 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         [HttpPost("")]
         public IActionResult CreateComment([FromBody]CommentDto commentDto)
         {
-            int authorUserId = _authService.GetCurrentUser(User).Id;
-            var comment = _commentRepository.Create(commentDto.ToModel(authorUserId));
+            var comment = commentDto.ToModel(_authService.GetCurrentUser(User).Id);
+            comment.Validate();
+            var createdComment = _commentRepository.Create(comment);
 
-            return Created(ResponseMessage.Success, comment);
+            return Created(ResponseMessage.Success, createdComment);
         }
 
         [HttpGet("{id}")]
@@ -61,6 +62,7 @@ namespace TomTec.RoundBuy.API.Controllers.v1
         {
             var comment = _commentRepository.Get(id);
             comment.CommentText = commentDto.CommentText;
+            comment.Validate();
 
             if (comment.AuthorUserId != _authService.GetCurrentUser(User).Id)
                 throw new UnauthorizedAccessException();
