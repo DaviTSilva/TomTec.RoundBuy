@@ -26,6 +26,7 @@ namespace TomTec.RoundBuy.Models
         public ICollection<ProductPack> ProductPacks { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Rating> Ratings { get; set; }
+        public ICollection<UserLikesOnAnnouncement> UserLikesOnAnnouncements { get; set; }
         public int MinimalSaleQuantity { get; set; }
         public bool IsActive { get; set; } = true;
         public bool IsAvailable { get; set; } = true;
@@ -37,5 +38,8 @@ namespace TomTec.RoundBuy.Models
 
         [NotMapped]
         public double? AverageRate { get { return this.Ratings == null || this.Ratings.Count == 0? 0 : this.Ratings.Select(x => x.Rate).Average(); } }
+
+        [NotMapped]
+        public int? TotalLikes { get { return this.UserLikesOnAnnouncements == null ? 0 : this.UserLikesOnAnnouncements.Count; } }
     }
 }

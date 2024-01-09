@@ -47,6 +47,9 @@ namespace TomTec.RoundBuy.Models
         public int UserTypeId { get; set; }
 
         public ICollection<UsersClaims> UsersClaims { get; set; }
+        public ICollection<UserLikesOnAnnouncement> UserLikesOnAnnouncements { get; set; }
+        public ICollection<UserLikesOnRating> UserLikesOnRatings { get; set; }
+        public ICollection<UserLikesOnComment> UserLikesOnComments { get; set; }
 
         [Column(TypeName = "varchar(max)")]
         [Required]

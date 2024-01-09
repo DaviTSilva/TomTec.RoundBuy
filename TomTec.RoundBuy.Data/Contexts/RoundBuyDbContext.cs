@@ -68,6 +68,39 @@ namespace TomTec.RoundBuy.Data
                 .HasOne(op => op.Product)
                 .WithMany(p => p.OrderProducts)
                 .HasForeignKey(op2 => op2.ProductId);
+
+            modelBuilder.Entity<UserLikesOnAnnouncement>()
+                .HasKey(uc => new { uc.UserId, uc.AnnouncementId });
+            modelBuilder.Entity<UserLikesOnAnnouncement>()
+                .HasOne(uc => uc.User)
+                .WithMany(b => b.UserLikesOnAnnouncements)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<UserLikesOnAnnouncement>()
+                .HasOne(bc => bc.Announcement)
+                .WithMany(c => c.UserLikesOnAnnouncements)
+                .HasForeignKey(bc => bc.AnnouncementId);
+
+            modelBuilder.Entity<UserLikesOnComment>()
+                .HasKey(uc => new { uc.UserId, uc.CommentId });
+            modelBuilder.Entity<UserLikesOnComment>()
+                .HasOne(uc => uc.User)
+                .WithMany(b => b.UserLikesOnComments)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<UserLikesOnComment>()
+                .HasOne(bc => bc.Comment)
+                .WithMany(c => c.UserLikesOnComments)
+                .HasForeignKey(bc => bc.CommentId);
+
+            modelBuilder.Entity<UserLikesOnRating>()
+                .HasKey(uc => new { uc.UserId, uc.RatingId });
+            modelBuilder.Entity<UserLikesOnRating>()
+                .HasOne(uc => uc.User)
+                .WithMany(b => b.UserLikesOnRatings)
+                .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<UserLikesOnRating>()
+                .HasOne(bc => bc.Rating)
+                .WithMany(c => c.UserLikesOnRatings)
+                .HasForeignKey(bc => bc.RatingId);
         }
 
         private static void SetUpOnDeleteMethod(ModelBuilder modelBuilder)
@@ -163,6 +196,10 @@ namespace TomTec.RoundBuy.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<UserLikesOnAnnouncement> UserLikesOnAnnouncements { get; set; }
+        public DbSet<UserLikesOnComment> UserLikesOnComments { get; set; }
+        public DbSet<UserLikesOnRating> UserLikesOnRatings { get; set; }
+
         #endregion
     }
 }

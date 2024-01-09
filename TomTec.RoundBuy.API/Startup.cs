@@ -62,6 +62,7 @@ namespace TomTec.RoundBuy.API
             services.AddScoped<IAnnouncementService, AnnouncementService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IRatingService, RatingService>();
+            services.AddScoped<ILikesRepository, LikesRepository>();
 
             //Filters Handlings
             services.AddScoped<KeyNotFoundExceptionFilterAttribute>();

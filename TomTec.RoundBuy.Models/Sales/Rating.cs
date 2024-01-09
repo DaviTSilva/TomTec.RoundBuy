@@ -24,5 +24,9 @@ namespace TomTec.RoundBuy.Models
         public string Cons { get; set; }
 
         public double Rate { get; set; }
+        public ICollection<UserLikesOnRating> UserLikesOnRatings { get; set; }
+
+        [NotMapped]
+        public int? TotalLikes { get { return this.UserLikesOnRatings == null ? 0 : this.UserLikesOnRatings.Count; } }
     }
 }

@@ -16,5 +16,10 @@ namespace TomTec.RoundBuy.Models
         [Column(TypeName = "varchar(500)")]
         [Required]
         public string CommentText { get; set; }
+
+        public ICollection<UserLikesOnComment> UserLikesOnComments { get; set; }
+
+        [NotMapped]
+        public int? TotalLikes { get { return this.UserLikesOnComments == null ? 0 : this.UserLikesOnComments.Count; } }
     }
 }

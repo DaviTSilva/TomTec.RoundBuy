@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TomTec.RoundBuy.Data;
 
 namespace TomTec.RoundBuy.API.Migrations
 {
     [DbContext(typeof(RoundBuyDbContext))]
-    partial class RoundBuyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230503151403_AddingLikes")]
+    partial class AddingLikes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
